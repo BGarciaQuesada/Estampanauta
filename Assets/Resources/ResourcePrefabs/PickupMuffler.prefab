@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8151878735491478053}
-  - component: {fileID: 7883710599123437288}
+  - component: {fileID: 5496497065886580489}
+  - component: {fileID: 8067460620956221326}
   m_Layer: 0
   m_Name: PickupMuffler
   m_TagString: Untagged
@@ -33,7 +34,28 @@ Transform:
   - {fileID: 4190970093752978419}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7883710599123437288
+--- !u!135 &5496497065886580489
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270235632677382111}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &8067460620956221326
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -52,8 +74,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.28, y: 0.1, z: 0.47}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.24420984, y: 0.11846433, z: 0.53233266}
+  m_Center: {x: -0.0063801245, y: 0.0013296809, z: -0.021558484}
 --- !u!1 &6283115839556160200
 GameObject:
   m_ObjectHideFlags: 0

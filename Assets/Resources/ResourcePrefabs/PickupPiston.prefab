@@ -99,7 +99,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2231959651324465274}
-  - component: {fileID: 7833444770732930858}
+  - component: {fileID: 9106537280060115120}
+  - component: {fileID: 3662976457409880667}
   m_Layer: 0
   m_Name: PickupPiston
   m_TagString: Untagged
@@ -125,7 +126,28 @@ Transform:
   - {fileID: 7054821548843709141}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7833444770732930858
+--- !u!135 &9106537280060115120
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335487731062672674}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.4, z: 0.1}
+--- !u!65 &3662976457409880667
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,8 +166,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.68, y: 1.14, z: 0.7}
-  m_Center: {x: 0, y: 0.42, z: 0}
+  m_Size: {x: 0.52701676, y: 0.8799727, z: 0.68020856}
+  m_Center: {x: 0.0025184785, y: 0.37577823, z: 0.08801375}
 --- !u!1 &3250994090297240831
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,11 +5,16 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+<<<<<<< HEAD
+=======
+  - PlayerCollider
+  - Planet
+>>>>>>> 2dcc258a28295ac187f8d157468a8ee54273923e
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 

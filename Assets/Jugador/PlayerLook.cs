@@ -80,15 +80,15 @@ public class PlayerLook : MonoBehaviour
     {
         if (cameraTransform == null)
             return;
-        HandleLook();
+        //HandleLook();
     }
 
-    private void HandleLook()
-    {
-        float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime; // Movimiento horizontal del ratón
+    //private void HandleLook()
+    //{
+    //    float mouseX = lookInput.x * mouseSensitivity * Time.deltaTime; // Movimiento horizontal del ratón
 
-        transform.Rotate(0f, mouseX, 0f); // Rotamos el jugador en Y (yaw)
+    //    transform.Rotate(0f, mouseX, 0f); // Rotamos el jugador en Y (yaw)
 
-        cameraTransform.localRotation = Quaternion.identity; // Reseteamos la rotación local de la cámara
-    }
+    //    cameraTransform.localRotation = Quaternion.identity; // Reseteamos la rotación local de la cámara
+    //}
 }

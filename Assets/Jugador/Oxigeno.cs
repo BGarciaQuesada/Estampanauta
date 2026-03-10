@@ -4,56 +4,29 @@ using UnityEngine;
 
 public class Oxigeno : MonoBehaviour
 {
-    [SerializeField] private float cantidadOxigeno = 120f; // Cantidad de oxígeno disponible
-    [SerializeField] TextMeshProUGUI txtOxigeno; // Referencia al texto que muestra la cantidad de oxígeno
+    public float timer = 0;
+    public TextMeshProUGUI textoOxigeno;
 
-    public float tiempoActual;
-    public float referenciaTimer = 10f;
-    public bool timerCorriendo;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Update()
     {
-        tiempoActual = referenciaTimer;
-        timerCorriendo = false;
-    }
+        timer -= Time.deltaTime;
+        textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
 
-    // Update is called once per frame
-    void Update()
-    {
-        //txtOxigeno.text = cantidadOxigeno.ToString("F0"); // Actualiza el texto con la cantidad de oxígeno formateada sin decimales
-        if (timerCorriendo) {
-            tiempoActual -= Time.deltaTime; // Resta el tiempo transcurrido desde el último frame al tiempo actual
-            txtOxigeno.text = tiempoActual.ToString("F0"); // Actualiza el texto con el tiempo actual formateado con dos decimales
-            if (tiempoActual <= 0f) // Si el tiempo actual llega a cero o es menor
-            {
-                tiempoActual = 0f;
-                timerCorriendo = false;
-
-                TimerExpirado();
-            }
+        if(timer <0)
+        {
+                       timer = 0;
+            Debug.Log("Ha terminado tiempo");
+            //  detiene jugador
+            //muestra aniamcaiojn de muerte
+            //pantalla fin juego
         }
     }
 
-    public void TimerExpirado()
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Ha terminado tiempo");
+        if (other.CompareTag("Respawn"))
+        {
+            timer = 120; // Aumenta el tiempo en 10 segundos al recoger el oxígeno
+        }
     }
-
-    public void IniciarTimer()
-    {
-        tiempoActual = referenciaTimer; // Reinicia el tiempo actual al valor de referencia
-        timerCorriendo = true;
-    }
-
-    public void ResetTimer()
-    {
-        tiempoActual = referenciaTimer; // Reinicia el tiempo actual al valor de referencia
-        timerCorriendo = false; // Detiene el timer
-    }
-    //IEnumerator RestaOxigeno()
-    //{
-    //    cantidadOxigeno -= 1f; // Resta 1 unidad de oxígeno cada segundo
-    //    yield return new WaitForSeconds(1f); // Espera 1 segundo antes de la siguiente resta
-    
 }

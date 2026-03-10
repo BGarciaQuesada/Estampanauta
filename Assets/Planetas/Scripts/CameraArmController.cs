@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class CameraArmController : MonoBehaviour
 {
-    public float verticalClamp = 30f;
+    //Cuanto más bajo, más restrictivo es el movimiento vertical de la cámara. Cuanto más alto, más libertad tiene para mirar hacia arriba o hacia abajo.
+    public float verticalClamp = 30f; 
     public Vector2 sensitivity = Vector2.one;
     PlayerControls playerControls;
 

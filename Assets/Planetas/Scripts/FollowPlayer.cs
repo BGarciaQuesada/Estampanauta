@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     [Range(.1f,1f)]
-    public float followDamping;
+    public float followDamping; //Cuanto más bajo, más rápido sigue al jugador. Cuanto más alto, más lento lo hace.
     public Transform playerTransform;
     private void FixedUpdate()
     {

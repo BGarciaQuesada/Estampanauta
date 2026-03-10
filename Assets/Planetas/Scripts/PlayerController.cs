@@ -81,10 +81,20 @@ public class PlayerController : MonoBehaviour
     {
         input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        Vector3 cameraRotation = new Vector3(0, MainCameraTransform.eulerAngles.y + CameraArmTransform.eulerAngles.y, 0);
-        Vector3 Dir = Quaternion.Euler(cameraRotation) * input;
+        //Vector3 cameraRotation = new Vector3(0, MainCameraTransform.eulerAngles.y + CameraArmTransform.eulerAngles.y, 0);
+        //Vector3 Dir = Quaternion.Euler(cameraRotation) * input;
 
-        Vector3 movement_dir = (transform.forward * Dir.z + transform.right * Dir.x);
+        //Vector3 movement_dir = (transform.forward * Dir.z + transform.right * Dir.x);
+
+        Vector3 camForward = Vector3.ProjectOnPlane(MainCameraTransform.forward, normalVector).normalized;
+        Vector3 camRight = Vector3.ProjectOnPlane(MainCameraTransform.right, normalVector).normalized;
+
+        Vector3 Dir = camForward * input.z + camRight * input.x;
+
+        Vector3 forward = Vector3.ProjectOnPlane(transform.forward, normalVector).normalized;
+        Vector3 right = Vector3.ProjectOnPlane(transform.right, normalVector).normalized;
+
+        Vector3 movement_dir = Dir.normalized;
 
         // Separamos velocidad vertical (gravedad) de la horizontal
         Vector3 verticalVelocity = Vector3.Project(rb.linearVelocity, normalVector);
@@ -94,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
         if (movement_dir != Vector3.zero)
         {
-            playerVisual.localRotation = Quaternion.LookRotation(Dir);
+            playerVisual.rotation = Quaternion.LookRotation(movement_dir, normalVector);
         }
 
         if (slowDown)
@@ -107,13 +117,13 @@ public class PlayerController : MonoBehaviour
 
         normalVector = (transform.position - currentPlanet.position).normalized;
 
-        rb.AddForce(normalVector * gravity, ForceMode.Acceleration);
+        rb.AddForce(-normalVector * Mathf.Abs(gravity), ForceMode.Acceleration);
     }
 
     void ApplyPlanetRotation()
     {
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, normalVector) * transform.rotation;
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
         if (isTouchingPlanetSurface && CanJump)
             rotationSpeed = tmpRotationSpeed;

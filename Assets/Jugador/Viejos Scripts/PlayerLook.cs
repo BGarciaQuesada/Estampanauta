@@ -46,8 +46,8 @@ public class PlayerLook : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, yaw, 0); // Reseteamos la rotación en X y Z, manteniendo Y
         cameraPitch = 0f; // Reseteamos el pitch de la cámara
         lookInput = Vector2.zero; // Reseteamos la entrada de mirada
-        if (cameraTransform != null) // Reseteamos la rotación local de la cámara
-            cameraTransform.localRotation = Quaternion.identity;
+        //if (cameraTransform != null) // Reseteamos la rotación local de la cámara
+        //    cameraTransform.localRotation = Quaternion.identity;
 
         StartCoroutine("StartInput");
     }

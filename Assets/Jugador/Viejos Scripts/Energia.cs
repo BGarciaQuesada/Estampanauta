@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class Oxigeno : MonoBehaviour
+public class Energia : MonoBehaviour
 {
     public float timer = 0;
     public TextMeshProUGUI textoOxigeno;

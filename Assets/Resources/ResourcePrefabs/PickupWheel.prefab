@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 7321057748608574914}
   - component: {fileID: 7236761703780000260}
   - component: {fileID: 7182148876282429251}
+  - component: {fileID: -7072168661737415235}
+  - component: {fileID: 5550933985173339157}
+  - component: {fileID: -5793337180981040033}
   m_Layer: 0
   m_Name: PickupWheel
   m_TagString: Untagged
@@ -163,3 +166,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7072168661737415235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498631489809703775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c41992c48df16842bd7ac1d37f4b0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
+  grabPoint: {fileID: 0}
+--- !u!114 &5550933985173339157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498631489809703775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc1c6bcff8208fa4c9cfe4fbe3f50a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Consumable
+--- !u!114 &-5793337180981040033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498631489809703775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d8156c58d96e9498bc7d6a28d066ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemGravityController
+  currentPlanet: {fileID: 0}
+  gravity: -20

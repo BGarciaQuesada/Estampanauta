@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: -7511558181221131132}
   - component: {fileID: 5978178382675297763}
   - component: {fileID: 8341965847931179528}
+  - component: {fileID: 7477005451918778917}
+  - component: {fileID: -1999612126695262821}
+  - component: {fileID: 7024675956094306618}
   m_Layer: 0
   m_Name: Bucket
   m_TagString: Untagged
@@ -143,6 +146,47 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7477005451918778917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149155446097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14a20c3930e47a245aa12b84ad666fd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bucket
+  liquid: {fileID: 0}
+  IsFull: 0
+--- !u!114 &-1999612126695262821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149155446097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c41992c48df16842bd7ac1d37f4b0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
+  grabPoint: {fileID: 0}
+--- !u!114 &7024675956094306618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149155446097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d8156c58d96e9498bc7d6a28d066ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemGravityController
+  currentPlanet: {fileID: 0}
+  gravity: -20
 --- !u!1 &7345681185073705639
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4170324377162701954
 Transform:
   m_ObjectHideFlags: 0

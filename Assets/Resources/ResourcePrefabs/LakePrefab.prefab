@@ -1343,6 +1343,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4428595258894757033}
   - component: {fileID: 266825861021572050}
+  - component: {fileID: 2669714122034811118}
   m_Layer: 0
   m_Name: LakePrefab
   m_TagString: Untagged
@@ -1398,3 +1399,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.158857, y: 1, z: 2.1587095}
   m_Center: {x: 0.02674973, y: 0, z: 0.80605006}
+--- !u!114 &2669714122034811118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9097214507329753337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5b2f5b111308e34fa5018b1d291f024, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResourceZone
+  resourcePrefab: {fileID: 0}
+  canReceiveBuckets: 1

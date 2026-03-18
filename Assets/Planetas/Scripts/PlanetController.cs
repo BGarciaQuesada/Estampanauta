@@ -4,7 +4,7 @@ public class PlanetController : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController2 playerController = other.GetComponent<PlayerController2>();
+        PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
         {
             if (playerController.currentPlanet == transform) return;

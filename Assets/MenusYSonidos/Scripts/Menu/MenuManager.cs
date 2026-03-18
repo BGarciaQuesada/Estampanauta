@@ -81,21 +81,41 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator FadeOutYLoad()
     {
-        if (musicaFondo != null) // Si hay musica de fondo asignada
+        if (musicaMenu != null) // Si hay musica de fondo asignada
         {
-            float volumenInicial = musicaFondo.volume; // Guardar el volumen inicial de la musica
+            float volumenInicial = musicaMenu.volume; // Guardar el volumen inicial de la musica
 
             for (float t = 0; t < duracionFade; t += Time.deltaTime) // Hacer un bucle durante la duracion del fade
             {
-                musicaFondo.volume = Mathf.Lerp(volumenInicial, 0, t / duracionFade); // Interpolar el volumen de la musica
+                musicaMenu.volume = Mathf.Lerp(volumenInicial, 0, t / duracionFade); // Interpolar el volumen de la musica
                 yield return null;
             }
 
-            musicaFondo.volume = 0; // Asegurarse de que el volumen sea 0 al final del fade
-            musicaFondo.Stop(); // Detener la musica de fondo
+            musicaMenu.volume = 0; // Asegurarse de que el volumen sea 0 al final del fade
+            musicaMenu.Stop(); // Detener la musica de fondo
         }
 
         SceneManager.LoadScene("Nivel"); // Cargar la escena del nivel
+    }
+
+    public void Salir()
+    {
+        Debug.Log("Saliendo del juego...");
+
+        // Directiva de preprocesador
+        #if UNITY_EDITOR
+                // Si estamos en el editor de Unity, usamos el comando para detener el juego.
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                                        // Si estamos en un ejecutable (Build), cerramos la aplicación.
+                                        Application.Quit();
+        #endif
+    }
+
+    // Metodo para volver al menu principal independientemente de la escena
+    public void VolverAlMenuPrincipal()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
 }

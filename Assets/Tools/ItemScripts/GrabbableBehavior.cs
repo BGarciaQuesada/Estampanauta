@@ -1,18 +1,17 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using UnityEngine;
 
 // Esta clase maneja el agarrado y soltado de objetos.
 
-// [!] EL PLAYER ES EL QUE TIENE INPUT SYSTEM! No se manejan mÈtodos con InputValue, solo la acciÛn que conllevar· hacerlo.
+// [!] EL PLAYER ES EL QUE TIENE INPUT SYSTEM! No se manejan m√©todos con InputValue, solo la acci√≥n que conllevar√° hacerlo.
 public class GrabbableBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform grabPoint; // Punto donde aparecer· el objeto al ser agarrado
+    [SerializeField] private Transform grabPoint; // Punto donde aparecer√° el objeto al ser agarrado
 
     private bool itemEquipped = false;
 
     public void PickUpitem()
     {
-        // [!] ESTE IF ES REDUNDANTE Y DEBERÕA SER CONTROLADO EN PLAYER. Hasta que no se haga merge, se queda asÌ.
         if (!itemEquipped) 
         {
             itemEquipped = true;
@@ -21,6 +20,15 @@ public class GrabbableBehavior : MonoBehaviour
             transform.SetParent(grabPoint.transform);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
+
+            // Avisar al player (busca que tenga PlayerInteraction y, si lo encuentra, le dice que el objeto que tiene en la mano es este)
+            PlayerInteraction player = FindFirstObjectByType<PlayerInteraction>();
+
+            if (player != null)
+            {
+                player.SetHeldItem(gameObject);
+            }
+
         }
     }
 

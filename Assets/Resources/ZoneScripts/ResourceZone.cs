@@ -3,7 +3,7 @@ using UnityEngine;
 // Esta clase maneja el comportamiento de las zonas de recursos, que pueden recibir herramientas para extraer recursos
 // Todo menos el cohete, vamos
 
-public class ResourceZone : MonoBehaviour
+public class ResourceZone : MonoBehaviour, IItemReceiver
 {
     [SerializeField] private GameObject resourcePrefab; // Prefab del recurso que se va a generar al usar la herramienta
     [SerializeField] private bool canReceiveBuckets;    // Si esta zona puede recibir cubos para rellenarlos

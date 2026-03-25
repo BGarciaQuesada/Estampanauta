@@ -1,9 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 // Esta clase maneja el comportamiento de la zona de la nave, la cual recibe consumibles
 
-public class ShipZone : MonoBehaviour
+public class ShipZone : MonoBehaviour, IItemReceiver
 {
+    // [!] La nave necesita conocer la lista de objetivos para aceptar o no los items, y para actualizar el progreso de los objetivos
+    [SerializeField] private List<Objective> objectives;
+    public FloatingText feedbackText; // para "¡Lleno!"
+
     public bool Receive(IItem item, GameObject user)
     {
         // Lo del as: básicamente comprueba de forma segura si el item recibido es del tipo de la variable.
@@ -26,5 +31,47 @@ public class ShipZone : MonoBehaviour
 
         // Si no se reconoce el item (aka no es un consumible), no se acepta
         return false;
+    }
+
+    bool TryAdd(string id, System.Action onSuccess = null)
+    {
+        Objective obj = objectives.Find(o => o.id == id);
+
+        if (obj == null)
+        {
+            Debug.LogWarning($"No existe objetivo para {id}");
+            return false;
+        }
+
+        if (!obj.CanReceive)
+        {
+            ShowFullMessage();
+            return false;
+        }
+
+        obj.Add();
+
+        Debug.Log($"{id}: {obj.current}/{obj.required}");
+
+        onSuccess?.Invoke();
+
+        UpdateUI();
+
+        return true;
+    }
+
+    void ShowFullMessage()
+    {
+        if (feedbackText != null)
+        {
+            feedbackText.Show("¡Lleno!");
+        }
+    }
+
+    void UpdateUI()
+    {
+        // Aquí llamas a tu sistema de UI
+        // Ejemplo:
+        // UIManager.UpdateObjectives(objectives);
     }
 }

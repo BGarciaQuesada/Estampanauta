@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 6956922710624421677}
   - component: {fileID: 1788542664538576423}
   - component: {fileID: 8567485197514168123}
+  - component: {fileID: 77901059556769394}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -315,6 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   rayCastLength: 3
   rotationSpeed: 15
+  rotationSpin: 0
   speed: 25
   gravity: -300
   jumpForce: 70
@@ -370,6 +372,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.29, y: 2.1931515, z: 0.5}
   m_Center: {x: 0, y: 0.8554678, z: 0}
+--- !u!114 &77901059556769394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294125398888796698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb40019b5695b57488032e5f6c5a2276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController2
+  rayCastLength: 3
+  rotationSpeed: 15
+  speed: 25
+  gravity: -300
+  jumpForce: 70
+  currentPlanet: {fileID: 0}
+  playerVisual: {fileID: 6915546971207099063}
+  isTouchingPlanetSurface: 0
+  CameraArmTransform: {fileID: 0}
 --- !u!1 &1405170988918284562
 GameObject:
   m_ObjectHideFlags: 0

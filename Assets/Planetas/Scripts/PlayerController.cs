@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
     bool CanJump = true;
     bool slowDown = false;
 
-    private Animator animator;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -37,7 +35,6 @@ public class PlayerController : MonoBehaviour
 
         tmpGravity = gravity;
         tmpRotationSpeed = rotationSpeed;
-        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -59,9 +56,6 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (!CanJump || !isTouchingPlanetSurface) return;
-
-        animator.SetTrigger("Jump");
-        animator.SetBool("OnAir", true);
 
         // Eliminamos velocidad vertical
         rb.linearVelocity -= Vector3.Project(rb.linearVelocity, normalVector);
@@ -107,24 +101,7 @@ public class PlayerController : MonoBehaviour
         Vector3 horizontalVelocity = movement_dir * speed;
 
         rb.linearVelocity = verticalVelocity + horizontalVelocity;
-        if (horizontalVelocity != Vector3.zero)
-        {
-            transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
-            animator.SetBool("run", true);
-        }
-        else
-            animator.SetBool("run", false);
-        //NO FUNIONA ESTO
-        if(horizontalVelocity.x == 0 && horizontalVelocity.z != 0)
-        {
-            if(horizontalVelocity.z > 0)
-                transform.rotation = transform.rotation * Quaternion.Euler(0, 90, 0);
-            else if (horizontalVelocity.z < 0)
-                transform.rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
-        }
 
-
-            Debug.Log(horizontalVelocity);
         if (movement_dir != Vector3.zero)
         {
             playerVisual.rotation = Quaternion.LookRotation(movement_dir, normalVector);
@@ -157,7 +134,6 @@ public class PlayerController : MonoBehaviour
         if (other.transform == currentPlanet)
         {
             isTouchingPlanetSurface = true;
-            animator.SetBool("OnAir", false);
             CanJump = true;
         }
     }

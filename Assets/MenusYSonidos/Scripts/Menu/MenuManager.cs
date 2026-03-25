@@ -21,9 +21,10 @@ public class MenuManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        int SceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex; // Obtener el índice de la escena actual
+        //int SceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex; // Obtener el índice de la escena actual
 
-        if (SceneIndex == 0) // Si estamos en la escena del menú principal
+        // Si estamos en el menu de inicio
+         if (SceneManager.GetActiveScene().name == "Menu")
         {
             if (panelMenuPrincipal != null && panelOpciones != null)
             {

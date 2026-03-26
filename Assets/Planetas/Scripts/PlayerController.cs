@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private Animator animator;
 
+    public bool canMove = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -51,7 +53,8 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Movement();
+        if(canMove)
+            Movement();
         ApplyGravity();
         ApplyPlanetRotation();
     }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Planet
   - PlayerCollider
+  - Enemy
   layers:
   - Default
   - TransparentFX

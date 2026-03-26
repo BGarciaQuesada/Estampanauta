@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private Transform MainCameraTransform;
     public Transform CameraArmTransform;
 
+    public GameObject armature;
+    public float velocidadRotacion = 5f;    
+
     bool CanJump = true;
     bool slowDown = false;
 
@@ -54,7 +57,18 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if(canMove)
+        {
             Movement();
+            Vector3 direccion = new Vector3(input.x, 0, input.z);
+
+            if (direccion.magnitude > 0.1f)
+            {
+                Quaternion rotacionObjetivo = Quaternion.LookRotation(direccion);
+                armature.transform.rotation = Quaternion.Slerp(transform.rotation, rotacionObjetivo, velocidadRotacion * Time.deltaTime);
+            }
+        }
+           
+
         ApplyGravity();
         ApplyPlanetRotation();
     }
@@ -88,7 +102,9 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
-        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        float x = Input.GetAxisRaw("Horizontal");
+        float z = Input.GetAxisRaw("Vertical");
+        input = new Vector3(x, 0, z);
 
         //Vector3 cameraRotation = new Vector3(0, MainCameraTransform.eulerAngles.y + CameraArmTransform.eulerAngles.y, 0);
         //Vector3 Dir = Quaternion.Euler(cameraRotation) * input;
@@ -118,20 +134,32 @@ public class PlayerController : MonoBehaviour
         else
             animator.SetBool("run", false);
         //NO FUNIONA ESTO
-        if(horizontalVelocity.x == 0 && horizontalVelocity.z != 0)
-        {
-            if(horizontalVelocity.z > 0)
-                transform.rotation = transform.rotation * Quaternion.Euler(0, 90, 0);
-            else if (horizontalVelocity.z < 0)
-                transform.rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
-        }
+        //if(horizontalVelocity.x == 0 && horizontalVelocity.z != 0)
+        //{
+        //    if(horizontalVelocity.z > 0)
+        //        transform.rotation = transform.rotation * Quaternion.Euler(0, 90, 0);
+        //    else if (horizontalVelocity.z < 0)
+        //        transform.rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
+        //}
 
 
-            Debug.Log(horizontalVelocity);
-        if (movement_dir != Vector3.zero)
+        //if (movement_dir != Vector3.zero)
+        //{
+        //    playerVisual.rotation = Quaternion.LookRotation(movement_dir, normalVector);
+        //}
+        if(z >= 0)
         {
-            playerVisual.rotation = Quaternion.LookRotation(movement_dir, normalVector);
+            if (movement_dir.magnitude > 0.1f)
+            {
+                Quaternion rotacionObjetivo = Quaternion.LookRotation(movement_dir, normalVector);
+                transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                rotacionObjetivo,
+                velocidadRotacion * Time.deltaTime
+                );
+            }
         }
+        
 
         if (slowDown)
             rb.linearVelocity *= .5f;

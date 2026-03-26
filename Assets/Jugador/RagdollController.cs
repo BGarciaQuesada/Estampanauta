@@ -61,10 +61,6 @@ public class RagdollControl : MonoBehaviour
         playerController.canMove = true; // Reactiva el movimiento del jugador después de desactivar el Ragdoll
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     IEnumerator DesactivaRagdollDespuesDeTiempo(float tiempo)
     {
@@ -76,7 +72,10 @@ public class RagdollControl : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            GetComponent<Energia>().timer -= 10f; // Resta 10 segundos al tiempo de oxígeno al colisionar con un enemigo
             ActivaRagdoll(); // Activa el Ragdoll al presionar la tecla K
+            if (GetComponent<Energia>().timer < 0)
+                return;
             StartCoroutine(DesactivaRagdollDespuesDeTiempo(2f)); // Desactiva el Ragdoll después de 5 segundos
         }
             

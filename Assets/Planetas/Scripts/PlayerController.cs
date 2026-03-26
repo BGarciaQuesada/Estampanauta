@@ -47,10 +47,13 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // SALTO CON ESPACIO
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (canMove)
         {
-            Jump();
+            // SALTO CON ESPACIO
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Jump();
+            }
         }
     }
 

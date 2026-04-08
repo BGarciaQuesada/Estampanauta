@@ -2,7 +2,7 @@
 - Project name: Estampanauta
 - Unity version: Unity 6000.3.9f1
 - Active game object:
-  - Name: CameraTarget
-  - Tag: Untagged
+  - Name: Sphere (3)
+  - Tag: Planet
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

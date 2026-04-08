@@ -34,7 +34,7 @@ public class ResourceZone : MonoBehaviour, IItemReceiver
 
             if (gravity != null)
             {
-                PlayerController player = user.GetComponent<PlayerController>();
+                PlayerController2 player = user.GetComponent<PlayerController2>();
 
                 if (player != null)
                     gravity.currentPlanet = player.currentPlanet;

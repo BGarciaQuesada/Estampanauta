@@ -23,7 +23,7 @@ public class ItemGravityController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlanetController planet = other.GetComponent<PlanetController>();
+        PlanetController2 planet = other.GetComponent<PlanetController2>();
 
         if (planet != null)
         {

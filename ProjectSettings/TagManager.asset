@@ -7,6 +7,8 @@ TagManager:
   - Planet
   - PlayerCollider
   - Enemy
+  - Mano
+  - Pick
   layers:
   - Default
   - TransparentFX

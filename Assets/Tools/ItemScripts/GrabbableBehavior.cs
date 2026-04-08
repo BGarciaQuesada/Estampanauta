@@ -32,6 +32,14 @@ public class GrabbableBehavior : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Mano") && !itemEquipped)
+        {
+            PickUpitem();
+        }
+    }
+
     public void DropItem()
     {
         if (itemEquipped)

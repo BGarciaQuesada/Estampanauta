@@ -9,6 +9,7 @@ public class UIProgressBar : MonoBehaviour
 
     public void Show()
     {
+        Debug.Log("Show");
         gameObject.SetActive(true);
         SetProgress(0);
     }

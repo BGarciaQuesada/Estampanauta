@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlanetController : MonoBehaviour
+public class PlanetController2 : MonoBehaviour
 {
     public List<IItem> items = new List<IItem>();
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController playerController = other.GetComponent<PlayerController>();
+        PlayerController2 playerController = other.GetComponent<PlayerController2>();
         
         if (playerController != null)
         {

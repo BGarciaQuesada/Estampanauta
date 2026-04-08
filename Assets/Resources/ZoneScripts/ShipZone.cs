@@ -7,7 +7,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 {
     // [!] La nave necesita conocer la lista de objetivos para aceptar o no los items, y para actualizar el progreso de los objetivos
     [SerializeField] private List<Objective> objectives;
-    public FloatingText feedbackText; // para "¡Lleno!"
+    //public FloatingText feedbackText; // para "¡Lleno!"
 
     public bool Receive(IItem item, GameObject user)
     {
@@ -61,11 +61,11 @@ public class ShipZone : MonoBehaviour, IItemReceiver
     }
 
     void ShowFullMessage()
-    {
-        if (feedbackText != null)
-        {
-            feedbackText.Show("¡Lleno!");
-        }
+    {//ESTONO ESTABA COMENTADO
+        //if (feedbackText != null)
+        //{
+        //    feedbackText.Show("¡Lleno!");
+        //}
     }
 
     void UpdateUI()

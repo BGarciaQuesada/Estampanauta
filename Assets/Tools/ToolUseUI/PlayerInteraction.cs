@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 // Esta clase DEBE APLICARSE A PLAYER!!! Maneja el coger y usar objetos al mantener pulsado el botón de interacción.
@@ -51,20 +52,22 @@ public class PlayerInteraction : MonoBehaviour
             Debug.LogWarning("El objeto no implementa IItem");
         }
     }
-
     // --- USAR OBJETO ---
     // [!!!] HACE FALTA METER ESTA ACCIÓN EN EL INPUT SYSTEM!!!!!!
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnInteract(InputValue value)
     {
-        if (context.started)
-            StartHold();
+        if (value.isPressed)
+        {
+            StartHold();            
+        }
 
-        if (context.canceled)
+        if(!value.isPressed)
             CancelHold();
     }
 
     private void Update()
     {
+
         if (!isHolding) return;
 
         holdTimer += Time.deltaTime;
@@ -79,6 +82,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void StartHold()
     {
+        Debug.Log("Entro en StartHold");    
         if (heldItem == null || currentReceiver == null) return;
 
         isHolding = true;
@@ -89,6 +93,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void CancelHold()
     {
+        Debug.Log("Entro en CancelHold");   
         if (!isHolding) return;
 
         isHolding = false;

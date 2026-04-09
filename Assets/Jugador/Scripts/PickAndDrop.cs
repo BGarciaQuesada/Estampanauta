@@ -15,7 +15,7 @@ public class PickAndDrop : MonoBehaviour
     [Header("Drop")]
     [SerializeField] private Vector3 dropOffset = new Vector3(2f,0f,0f);
 
-    private GameObject objectoEnMochila;
+    private GameObject objetoEnMochila;
 
     private InputAction soltarAction;
 
@@ -60,42 +60,46 @@ public class PickAndDrop : MonoBehaviour
             Soltar();
         }
     }
-    private void OnTriggerEnter(Collider other) => TryPick(other.gameObject);
+    //private void OnTriggerEnter(Collider other) => TryPick(other.gameObject);
 
     private void Soltar()
     {
-        if (objectoEnMochila == null)
+        if (objetoEnMochila == null)
             return;
-        objectoEnMochila.transform.SetParent(null);
-        objectoEnMochila.transform.position = transform.TransformPoint(dropOffset);
-        //if(objectoEnMochila.TryGetComponent<Rigidbody>(out var rb))
-        //{
-        //    rb.isKinematic = false;
-        //}
-        objectoEnMochila = null;    //pa poder coger mas
+        objetoEnMochila.transform.SetParent(null);
+        objetoEnMochila.transform.position = transform.TransformPoint(dropOffset);
+        objetoEnMochila.GetComponent<MeshCollider>().enabled = true; //para que vuelva a colisionar al soltarlo, si es que tenía meshcollider
+        if (objetoEnMochila.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.isKinematic = false;
+        }
+        objetoEnMochila = null;    //pa poder coger mas
 
     }
     private void TryPick(GameObject go)
     {
-        if (objectoEnMochila != null)
+        if (objetoEnMochila != null)
             return;
         if(!go.CompareTag("Pick")) 
             return;
-        objectoEnMochila = go;
-        if(objectoEnMochila.TryGetComponent<Rigidbody>(out var rb))
+        objetoEnMochila = go;
+        if(objetoEnMochila.TryGetComponent<Rigidbody>(out var rb))
         {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
         }
-        objectoEnMochila.transform.SetParent(mochila, worldPositionStays:false);
-        objectoEnMochila.transform.localPosition = Vector3.zero;
-        objectoEnMochila.transform.localRotation = Quaternion.identity;
+        objetoEnMochila.transform.SetParent(mochila, worldPositionStays:false);
+        objetoEnMochila.transform.localPosition = Vector3.zero;
+        objetoEnMochila.transform.localRotation = Quaternion.identity;
     }
     private void SoltarMano()
     {
         Transform obj = mano.transform.GetChild(0);
+        objetoEnMochila.GetComponent<MeshCollider>().enabled = true; //para que vuelva a colisionar al soltarlo, si es que tenía meshcollider
+        objetoEnMochila.GetComponent<Rigidbody>().isKinematic = false;
         obj.SetParent(null);
         obj.position = transform.TransformPoint(dropOffset);
+        objetoEnMochila = null;    //pa poder coger mas
     }
 }

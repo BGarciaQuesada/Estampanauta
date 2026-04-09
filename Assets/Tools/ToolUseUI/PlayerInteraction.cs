@@ -17,6 +17,27 @@ public class PlayerInteraction : MonoBehaviour
 
     public UIProgressBar progressBar; // esto se asigna desde el inspector
 
+    //ESTO ES NUEVO
+
+    public GameObject objetoEnMano; // Variable para verificar si el jugador tiene un objeto en la mano
+    [Header("Drop")]
+    [SerializeField] private Vector3 dropOffset = new Vector3(2f, 0f, 0f);
+    private InputAction soltarAction;
+
+    private void Start()
+    {
+        var playerInput = GetComponent<PlayerInput>();
+        if(playerInput != null)
+        {
+            soltarAction = playerInput.actions.FindAction("Soltar", throwIfNotFound: false);
+            if(soltarAction != null)
+            {
+                soltarAction.performed += OnSoltarPerformed;
+                soltarAction.Enable();
+            }
+        }
+    }
+
     // --- TRIGGERS DE ZONAS ---
 
     private void OnTriggerEnter(Collider other)
@@ -58,10 +79,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (value.isPressed)
         {
-            StartHold();            
+            StartHold();
         }
 
-        if(!value.isPressed)
+        if (!value.isPressed)
             CancelHold();
     }
 
@@ -82,7 +103,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void StartHold()
     {
-        Debug.Log("Entro en StartHold");    
+        Debug.Log("Entro en StartHold");
         if (heldItem == null || currentReceiver == null) return;
 
         isHolding = true;
@@ -93,7 +114,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void CancelHold()
     {
-        Debug.Log("Entro en CancelHold");   
+        Debug.Log("Entro en CancelHold");
         if (!isHolding) return;
 
         isHolding = false;
@@ -106,5 +127,29 @@ public class PlayerInteraction : MonoBehaviour
     {
         heldItem.UseOn(currentReceiver, gameObject);
         CancelHold();
+    }
+
+    //NUEVO
+    private void OnSoltarPerformed(InputAction.CallbackContext obj)
+    {
+        Soltar();
+
+    }
+    //private void OnTriggerEnter(Collider other) => TryPick(other.gameObject);
+
+    private void Soltar()
+    {
+        if (objetoEnMano == null)
+            return;
+        objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
+        //objetoEnMano.transform.SetParent(null);
+        //objetoEnMano.transform.position = transform.TransformPoint(dropOffset);
+        //objetoEnMano.GetComponent<MeshCollider>().enabled = true; //para que vuelva a colisionar al soltarlo, si es que tenía meshcollider
+        //if (objetoEnMano.TryGetComponent<Rigidbody>(out var rb))
+        //{
+        //    rb.isKinematic = false;
+        //}
+        objetoEnMano = null;    //pa poder coger mas
+
     }
 }

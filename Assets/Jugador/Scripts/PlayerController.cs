@@ -36,6 +36,11 @@ public class PlayerController : MonoBehaviour
     public bool canMove = true;
     public Transform mano;
 
+    [Header("Sonidos")]
+    [SerializeField] private AudioSource jumpSource;
+    [SerializeField] private AudioSource pasosSource;
+    [SerializeField] private AudioClip[] pasos;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (!CanJump || !isTouchingPlanetSurface) return;
-
+        jumpSource.Play();
         animator.SetTrigger("Jump");
         animator.SetBool("OnAir", true);
 
@@ -134,6 +139,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             animator.SetBool("run", true);
+            if(!pasosSource.isPlaying)
+            {
+                pasosSource.clip = pasos[UnityEngine.Random.Range(0, pasos.Length)];
+                pasosSource.Play();
+            }
         }
         else
             animator.SetBool("run", false);

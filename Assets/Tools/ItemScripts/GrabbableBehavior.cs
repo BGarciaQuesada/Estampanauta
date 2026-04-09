@@ -6,7 +6,7 @@ using UnityEngine;
 // [!] EL PLAYER ES EL QUE TIENE INPUT SYSTEM! No se manejan métodos con InputValue, solo la acción que conllevará hacerlo.
 public class GrabbableBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform grabPoint; // Punto donde aparecerá el objeto al ser agarrado
+    [SerializeField] public Transform grabPoint; // Punto donde aparecerá el objeto al ser agarrado
 
     private bool itemEquipped = false;
     public Collider colliderColision;   //hay que asignar el objeto Collider hijo
@@ -24,6 +24,7 @@ public class GrabbableBehavior : MonoBehaviour
             PlayerInteraction player = FindFirstObjectByType<PlayerInteraction>();
             if (player.objetoEnMano != null)
                 return;
+
             itemEquipped = true;
             colliderColision.enabled = false; // Desactivar colisión para evitar problemas al agarrar el objeto
 

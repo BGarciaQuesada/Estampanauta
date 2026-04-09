@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,6 +56,12 @@ public class PlayerInteraction : MonoBehaviour
     {
         IItemReceiver receiver = other.GetComponent<IItemReceiver>();
 
+        //esto es pq si el player sale de la zona mientras recarga la barra de interacción da error
+        StartCoroutine(SaleDeZona(receiver));   
+    }
+    IEnumerator SaleDeZona(IItemReceiver receiver)
+    {
+        yield return new WaitForSeconds(1f); // Espera medio segundo para evitar problemas de colisiones rápidas
         if (receiver != null && receiver == currentReceiver)
         {
             currentReceiver = null;
@@ -135,21 +142,12 @@ public class PlayerInteraction : MonoBehaviour
         Soltar();
 
     }
-    //private void OnTriggerEnter(Collider other) => TryPick(other.gameObject);
-
     private void Soltar()
     {
         if (objetoEnMano == null)
             return;
         objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
-        //objetoEnMano.transform.SetParent(null);
-        //objetoEnMano.transform.position = transform.TransformPoint(dropOffset);
-        //objetoEnMano.GetComponent<MeshCollider>().enabled = true; //para que vuelva a colisionar al soltarlo, si es que tenía meshcollider
-        //if (objetoEnMano.TryGetComponent<Rigidbody>(out var rb))
-        //{
-        //    rb.isKinematic = false;
-        //}
         objetoEnMano = null;    //pa poder coger mas
-
+        heldItem = null; // Limpiar el item que se tiene en la mano al soltarlo
     }
 }

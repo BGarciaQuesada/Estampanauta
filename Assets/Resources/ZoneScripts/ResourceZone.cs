@@ -28,16 +28,22 @@ public class ResourceZone : MonoBehaviour, IItemReceiver
 
             // Tiene que spawnear el recurso, y esto tiene que llamar a PlanetController para que se lo añada al inventario del planeta
             Vector3 spawnPos = transform.position + transform.up * 1.5f;
+            Debug.Log("creo resource");
             GameObject resource = Instantiate(resourcePrefab, spawnPos, Quaternion.identity);
 
             ItemGravityController gravity = resource.GetComponent<ItemGravityController>();
+            GrabbableBehavior g = resource.GetComponent<GrabbableBehavior>();
 
-            if (gravity != null)
+            if (gravity != null && g != null)
             {
-                PlayerController2 player = user.GetComponent<PlayerController2>();
+                PlayerController player = user.GetComponent<PlayerController>();
 
+                g.colliderColision = gameObject.transform.GetChild(0).GetComponent<Collider>(); // Asignar el collider del hijo (la zona de colisión) al grabbable para que se desactive al agarrarlo
+                g.grabPoint = player.mano;
                 if (player != null)
                     gravity.currentPlanet = player.currentPlanet;
+
+
             }
 
 

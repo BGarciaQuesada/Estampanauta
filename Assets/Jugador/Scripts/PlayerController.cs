@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     public bool canMove = true;
+    public Transform mano;
 
     private void Awake()
     {

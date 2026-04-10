@@ -1,20 +1,24 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Energia : MonoBehaviour
 {
     public float timer = 0;
-    public TextMeshProUGUI textoOxigeno;
+    //public TextMeshProUGUI textoOxigeno;
     public float tiempoMax = 120f;
     public bool death = false;
+
+    public Image barraBateria;
 
     private void Update()
     {
         timer -= Time.deltaTime;
-        textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
+        //textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
+        barraBateria.fillAmount = timer / tiempoMax; // Actualiza la barra de batería según el tiempo restante (valor entre 0 y 1)
 
-        if(timer <0)
+        if (timer <0)
         {
             timer = 0;
             if (!death)

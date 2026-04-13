@@ -7,7 +7,9 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 {
     // [!] La nave necesita conocer la lista de objetivos para aceptar o no los items, y para actualizar el progreso de los objetivos
     [SerializeField] private List<Objective> objectives;
-    //public FloatingText feedbackText; // para "¡Lleno!"
+    public FloatingText feedbackText; // para "¡Lleno!"
+
+    [SerializeField] private ObjectivesUIManager uiManager;
 
     public bool Receive(IItem item, GameObject user)
     {
@@ -33,18 +35,21 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         return false;
     }
 
+    // --- LÓGICA OBJETIVOS ---
     bool TryAdd(string id, System.Action onSuccess = null)
     {
         Objective obj = objectives.Find(o => o.id == id);
 
         if (obj == null)
         {
+            // Feedback interno
             Debug.LogWarning($"No existe objetivo para {id}");
             return false;
         }
 
         if (!obj.CanReceive)
         {
+            // Feedback externo (sale mensajito)
             ShowFullMessage();
             return false;
         }
@@ -60,18 +65,20 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         return true;
     }
 
+    // --- UI ---
     void ShowFullMessage()
-    {//ESTONO ESTABA COMENTADO
-        //if (feedbackText != null)
-        //{
-        //    feedbackText.Show("¡Lleno!");
-        //}
+    {
+        if (feedbackText != null)
+        {
+            feedbackText.Show("¡Lleno!");
+        }
     }
 
     void UpdateUI()
     {
-        // Aquí llamas a tu sistema de UI
-        // Ejemplo:
-        // UIManager.UpdateObjectives(objectives);
+        if (uiManager != null)
+        {
+            uiManager.UpdateAll(objectives);
+        }
     }
 }

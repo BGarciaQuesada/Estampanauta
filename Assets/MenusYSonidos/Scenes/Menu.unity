@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 218425747}
   - component: {fileID: 218425749}
   - component: {fileID: 218425748}
+  - component: {fileID: 218425750}
   m_Layer: 5
   m_Name: PauseEjemplo
   m_TagString: Untagged
@@ -195,6 +196,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218425746}
   m_CullTransparentMesh: 1
+--- !u!225 &218425750
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218425746}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &229289908
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1597,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
   pauseMenu: {fileID: 218425746}
+  canvasGroup: {fileID: 218425750}
+  fadeDuration: 0.3
 --- !u!1 &1502597212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,6 +2572,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2006846630}
   m_CullTransparentMesh: 1
+--- !u!1 &2053794655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053794656}
+  - component: {fileID: 2053794657}
+  m_Layer: 0
+  m_Name: SliderControl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2053794656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053794655}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 820.23755, y: 504.26733, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2053794657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2053794655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d244f8bef7155fc4a9feb5cd4958efea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SliderColorChanger
+  slider: {fileID: 632545224}
+  fillImage: {fileID: 545413753}
+  startColor: {r: 1, g: 1, b: 1, a: 1}
+  endColor: {r: 0, g: 0.62352943, b: 0.7490196, a: 1}
 --- !u!1 &2138190395
 GameObject:
   m_ObjectHideFlags: 0
@@ -2694,3 +2757,4 @@ SceneRoots:
   - {fileID: 1826704844}
   - {fileID: 883292256}
   - {fileID: 1470579079}
+  - {fileID: 2053794656}

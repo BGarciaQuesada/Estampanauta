@@ -1,57 +1,108 @@
 using UnityEngine;
+using System.Collections;
 
 public class PauseManager : MonoBehaviour
 {
-    [SerializeField] private GameObject pauseMenu; // Referencia al menú de pausa
-    private bool isPaused = false; // Estado de pausa
-    //public static bool InputsBlocked = false; // Variable estática para bloquear inputs en otros scripts
+    [SerializeField] private GameObject pauseMenu;   // Objeto del menú
+    [SerializeField] private CanvasGroup canvasGroup; // Para controlar el fade
+    [SerializeField] private float fadeDuration = 0.3f; // Duración del fade
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool isPaused = false;          // Estado del juego
+    private bool isTransitioning = false;   // Evita spam mientras anima
+    private Coroutine fadeCoroutine;        // Referencia a la animación actual
+
     void Start()
     {
-        pauseMenu.SetActive(false); // Asegurarse de que el menú de pausa esté oculto al inicio
+        // IMPORTANTE: el objeto debe estar activo para poder hacer fade
+        pauseMenu.SetActive(true);
+
+        // Estado inicial: invisible y sin interacción
+        canvasGroup.alpha = 0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // Solo permite pulsar ESC si NO está en transición
+        if (Input.GetKeyDown(KeyCode.Escape) && !isTransitioning)
         {
             TogglePause();
         }
     }
 
-    // Método para alternar entre pausar y reanudar el juego
+    // Cambia entre pausa y juego
     public void TogglePause()
     {
-        if(isPaused)
-        {
-            ResumeGame();
-        }
+        // Seguridad extra
+        if (isTransitioning) return;
+
+        // Si hay una animación en curso, la paramos
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+
+        // Elegimos qué animación lanzar
+        if (isPaused)
+            fadeCoroutine = StartCoroutine(FadeOut());
         else
+            fadeCoroutine = StartCoroutine(FadeIn());
+    }
+
+    // Animación de entrada (pausar)
+    IEnumerator FadeIn()
+    {
+        isTransitioning = true; // Bloquea input
+        isPaused = true;
+
+        // Pausamos el juego
+        Time.timeScale = 0f;
+        AudioListener.pause = true;
+
+        // Activamos interacción del menú
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+
+        float time = 0f;
+
+        // Fade de 0 --> 1
+        while (time < fadeDuration)
         {
-            PauseGame();
+            // Usamos unscaledDeltaTime porque el juego está pausado
+            canvasGroup.alpha = Mathf.Lerp(0f, 1f, time / fadeDuration);
+            time += Time.unscaledDeltaTime;
+            yield return null;
         }
+
+        canvasGroup.alpha = 1f; // Asegura valor final
+        isTransitioning = false; // Permite input otra vez
     }
 
-    // Método para pausar el juego
-    void PauseGame()
+    // Animación de salida (reanudar)
+    IEnumerator FadeOut()
     {
-        pauseMenu.SetActive(true); // Mostrar el menú de pausa
-        Time.timeScale = 0f; // Detener el tiempo del juego
-        AudioListener.pause = true; // Pausar el audio
-        isPaused = true; // Actualizar el estado de pausa
-        //InputsBlocked = true; // Bloquear inputs en otros scripts
-    }
+        isTransitioning = true;
 
-    // Método para reanudar el juego
-    void ResumeGame()
-    {
-        pauseMenu.SetActive(false); // Ocultar el menú de pausa
-        Time.timeScale = 1f; // Reanudar el tiempo del juego
-        AudioListener.pause = false; // Reanudar el audio
-        isPaused = false; // Actualizar el estado de pausa
-        //InputsBlocked = false; // Desbloquear inputs en otros scripts
-    }
+        // Quitamos interacción mientras desaparece
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
 
+        float time = 0f;
+
+        // Fade de 1 --> 0
+        while (time < fadeDuration)
+        {
+            canvasGroup.alpha = Mathf.Lerp(1f, 0f, time / fadeDuration);
+            time += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        canvasGroup.alpha = 0f;
+
+        // Reanudamos el juego
+        Time.timeScale = 1f;
+        AudioListener.pause = false;
+        isPaused = false;
+
+        isTransitioning = false; // Permite input otra vez
+    }
 }

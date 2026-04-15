@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     void Jump(InputAction.CallbackContext context)
     {
         if (!CanJump) return;
-        rb.velocity *= 0;
+        rb.linearVelocity *= 0;
         rb.AddForce(normalVector * jumpForce, ForceMode.Impulse);
         gravity = tmpGravity / 2f;
         Invoke(nameof(RestoreGravity), 1f);
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
     public void EnterNewGravityField()
     {
         gravity = tmpGravity / 4f;
-        rb.velocity *= .5f;
+        rb.linearVelocity *= .5f;
         rotationSpeed = tmpRotationSpeed / 10f;
         slowDown = true;
         CanJump = false;
@@ -92,8 +92,8 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraRotation = new Vector3(0, MainCameraTransform.localEulerAngles.y + CameraArmTransform.localEulerAngles.y, 0);
         Vector3 Dir = Quaternion.Euler(cameraRotation) * input;
         Vector3 movement_dir = (transform.forward * Dir.z + transform.right * Dir.x);
-        Vector3 currentNormalVelocity = Vector3.Project(rb.velocity, normalVector.normalized);
-        rb.velocity = currentNormalVelocity + (movement_dir * speed);
+        Vector3 currentNormalVelocity = Vector3.Project(rb.linearVelocity, normalVector.normalized);
+        rb.linearVelocity = currentNormalVelocity + (movement_dir * speed);
 
         if (movement_dir != Vector3.zero)
         {
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("IsMoving", false);
         }
         if (slowDown)
-            rb.velocity *= .5f;
+            rb.linearVelocity *= .5f;
     }
 
     void ApplyGravity()

@@ -8,7 +8,7 @@ public class PlanetController : MonoBehaviour
         PlayerController playerController = other.GetComponent<PlayerController>();
         if (playerController != null)
         {
-            if (playerController.currentPlanet == transform) return;
+            if (playerController.currentPlanet == transform || playerController.currentPlanet == transform.parent.transform) return;
             playerController.currentPlanet = transform;
             playerController.EnterNewGravityField();
         }

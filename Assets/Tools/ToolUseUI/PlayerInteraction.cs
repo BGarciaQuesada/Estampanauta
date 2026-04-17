@@ -132,7 +132,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void CompleteInteraction()
     {
-        heldItem.UseOn(currentReceiver, gameObject);
+        heldItem.UseOn(currentReceiver, this.gameObject);
         CancelHold();
     }
 
@@ -146,7 +146,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (objetoEnMano == null)
             return;
-        objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
+        objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(GetComponent<PlayerController>().currentPlanet); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
         objetoEnMano = null;    //pa poder coger mas
         heldItem = null; // Limpiar el item que se tiene en la mano al soltarlo
     }

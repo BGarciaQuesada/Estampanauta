@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform == currentPlanet)
+        if ((other.transform == currentPlanet) || (other.transform.parent == currentPlanet))
         {
             isTouchingPlanetSurface = true;
             animator.SetBool("OnAir", false);

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Energia : MonoBehaviour
 {
+    public GameObject efectoFinEnergia;
+    public GameObject efectoRecuperaEnergia;
     public float timer = 0;
     //public TextMeshProUGUI textoOxigeno;
     public float tiempoMax = 120f;
@@ -26,9 +28,8 @@ public class Energia : MonoBehaviour
                 GetComponent<PlayerController>().canMove = false; // Detiene el movimiento del jugador al quedarse sin oxígeno
                 GetComponent<Animator>().SetTrigger("Death"); // Activa la animación de muerte al quedarse sin oxígeno
                 death = true; // Marca que el jugador ha muerto para evitar que se active la animación varias veces
+                StartCoroutine(EfectoFinJuego());
             }            
-            //  detiene jugador
-            //muestra aniamcaiojn de muerte
             //pantalla fin juego
         }
     }
@@ -38,11 +39,26 @@ public class Energia : MonoBehaviour
         if (other.CompareTag("Respawn"))
         {
             timer = tiempoMax; //devuelve el tiempo a su valor máximo al entrar en el trigger con el tag "Respawn"
+            StartCoroutine(EfectoCargaEnergia());
         }
     }
 
     private void ActivarRagdoll()
     {
         GetComponent<RagdollControl>().ActivaRagdoll(); // Llama a la función para activar el Ragdoll
+    }
+
+    IEnumerator EfectoFinJuego()
+    {
+        efectoFinEnergia.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        efectoFinEnergia.SetActive(false);
+    }
+    
+    IEnumerator EfectoCargaEnergia()
+    {
+        efectoRecuperaEnergia.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        efectoRecuperaEnergia.SetActive(false);
     }
 }

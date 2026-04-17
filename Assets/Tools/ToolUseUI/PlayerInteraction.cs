@@ -132,8 +132,12 @@ public class PlayerInteraction : MonoBehaviour
 
     void CompleteInteraction()
     {
-        heldItem.UseOn(currentReceiver, gameObject);
+        Debug.Log("entro");
         CancelHold();
+        
+        Debug.Log(currentReceiver);
+        heldItem.UseOn(currentReceiver, this.gameObject);
+        Debug.Log("salgo");
     }
 
     //NUEVO

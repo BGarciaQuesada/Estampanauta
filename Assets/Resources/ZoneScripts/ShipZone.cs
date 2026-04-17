@@ -11,8 +11,14 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 
     [SerializeField] private ObjectivesUIManager uiManager;
 
+    private void Start()
+    {
+        UpdateUI(); //para mostrar los objetivos pendientes al inicio 
+    }
+
     public bool Receive(IItem item, GameObject user)
     {
+        Debug.Log("RECIBEEEEEE");
         // Lo del as: básicamente comprueba de forma segura si el item recibido es del tipo de la variable.
         // Si lo es, se le asigna a la variable
         // Si no, se le asigna null (manejado por el if)
@@ -20,6 +26,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         if (bucket != null && bucket.IsFull)
         {
             bucket.Empty();
+            TryAdd("Fuel");
             Debug.Log("Cubo vaciado");
             return true;
         }
@@ -28,6 +35,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         if (consumable != null)
         {
             Debug.Log("Consumible aplicado a la nave");
+            //TryAdd(item);
             return true; // Se destruye dentro de UseOn
         }
 
@@ -79,6 +87,14 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         if (uiManager != null)
         {
             uiManager.UpdateAll(objectives);
+        }
+    }
+
+    private void NewObjetives()
+    {
+        foreach (var obj in objectives)
+        {
+            
         }
     }
 }

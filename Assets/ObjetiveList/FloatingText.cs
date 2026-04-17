@@ -6,7 +6,7 @@ using TMPro;
 
 public class FloatingText : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private TextMeshProUGUI textoLleno;
     [SerializeField] private float moveSpeed = 30f;
     [SerializeField] private float duration = 1f;
 
@@ -21,7 +21,7 @@ public class FloatingText : MonoBehaviour
     // Activar, posicionar, iniciar animación...
     public void Show(string message)
     {
-        text.text = message;
+        textoLleno.text = message;
         transform.localPosition = startPos;
         gameObject.SetActive(true);
 

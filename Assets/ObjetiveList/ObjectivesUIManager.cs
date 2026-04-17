@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class ObjectivesUIManager : MonoBehaviour
 {
-    [SerializeField] private List<ObjectiveUI> objectiveUIs;
+    [SerializeField] private List<ObjectiveUI> objectiveUis;
 
     public void UpdateAll(List<Objective> objectives)
     {
-        foreach (var ui in objectiveUIs)
+        foreach (var ui in objectiveUis)
         {
             Objective obj = objectives.Find(o => o.id == ui.GetID());
 

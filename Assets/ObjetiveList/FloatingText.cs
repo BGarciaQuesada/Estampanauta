@@ -21,7 +21,14 @@ public class FloatingText : MonoBehaviour
     // Activar, posicionar, iniciar animación...
     public void Show(string message)
     {
+        // if (gameObject.activeSelf) return; // Si en algun punto molesta el spam al pulsar, descomentar esto. No lo veo necesario actualmente
+
         textoLleno.text = message;
+
+        // Resetear alpha para que no se quede transparente ups
+        Color c = textoLleno.color;
+        textoLleno.color = new Color(c.r, c.g, c.b, 1f);
+
         transform.localPosition = startPos;
         gameObject.SetActive(true);
 
@@ -33,10 +40,17 @@ public class FloatingText : MonoBehaviour
     IEnumerator Animate()
     {
         float time = 0f;
+        Color startColor = textoLleno.color;
 
         while (time < duration)
         {
             transform.localPosition += Vector3.up * moveSpeed * Time.deltaTime;
+
+            // Para que haga fade
+            float alpha = 1 - (time / duration);
+            textoLleno.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+
+
             time += Time.deltaTime;
             yield return null;
         }

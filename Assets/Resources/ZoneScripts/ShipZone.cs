@@ -13,6 +13,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 
     private void Start()
     {
+        GenerateObjectives();
         UpdateUI(); //para mostrar los objetivos pendientes al inicio 
     }
 
@@ -25,18 +26,23 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         Bucket bucket = item as Bucket;
         if (bucket != null && bucket.IsFull)
         {
-            bucket.Empty();
-            TryAdd("Fuel");
-            Debug.Log("Cubo vaciado");
-            return true;
+            if (TryAdd("Fuel"))
+            {
+                bucket.Empty();
+                Debug.Log("Cubo vaciado");
+                return true;
+            }
         }
 
         Consumable consumable = item as Consumable;
         if (consumable != null)
         {
             Debug.Log("Consumible aplicado a la nave");
-            //TryAdd(item);
-            return true; // Se destruye dentro de UseOn
+
+            if (TryAdd("Crystal"))
+            {
+                return true;
+            }
         }
 
         // Si no se reconoce el item (aka no es un consumible), no se acepta
@@ -44,7 +50,9 @@ public class ShipZone : MonoBehaviour, IItemReceiver
     }
 
     // --- LÓGICA OBJETIVOS ---
-    bool TryAdd(string id, System.Action onSuccess = null)
+    // [!] Lo del success se había borrado porque originalmente se iba a hacer con mensajes y,
+    // [!] a pesar de ser borrado, regresó??? Asumo que ha sido lio de ramas de git. Arreglado.
+    bool TryAdd(string id)
     {
         Objective obj = objectives.Find(o => o.id == id);
 
@@ -66,14 +74,24 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 
         Debug.Log($"{id}: {obj.current}/{obj.required}");
 
-        onSuccess?.Invoke();
-
         UpdateUI();
 
         return true;
     }
 
     // --- UI ---
+    private void GenerateObjectives()
+    {
+        int fuel = Random.Range(3, 8); // 3–7
+        int crystal = 10 - fuel;
+
+        objectives = new List<Objective>
+    {
+        new Objective { id = "Fuel", required = fuel, current = 0 },
+        new Objective { id = "Crystal", required = crystal, current = 0 }
+    };
+    }
+
     void ShowFullMessage()
     {
         if (feedbackText != null)

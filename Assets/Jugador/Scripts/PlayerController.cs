@@ -139,11 +139,14 @@ public class PlayerController : MonoBehaviour
         {
             transform.rotation = transform.rotation * Quaternion.Euler(0, 0, 0);
             animator.SetBool("run", true);
-            if(!pasosSource.isPlaying)
+            if (isTouchingPlanetSurface)
             {
-                pasosSource.clip = pasos[UnityEngine.Random.Range(0, pasos.Length)];
-                pasosSource.Play();
-            }
+                if (!pasosSource.isPlaying)
+                {
+                    pasosSource.clip = pasos[UnityEngine.Random.Range(0, pasos.Length)];
+                    pasosSource.Play();
+                }
+            }            
         }
         else
             animator.SetBool("run", false);

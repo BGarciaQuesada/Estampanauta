@@ -13,6 +13,9 @@ public class Energia : MonoBehaviour
     public bool death = false;
 
     public Image barraBateria;
+    public AudioSource audioSource;
+    public AudioClip sonidoMuerte;
+    public AudioClip sonidoRecuperaBateria;
 
     private void Update()
     {
@@ -27,6 +30,8 @@ public class Energia : MonoBehaviour
             {
                 GetComponent<PlayerController>().canMove = false; // Detiene el movimiento del jugador al quedarse sin oxígeno
                 GetComponent<Animator>().SetTrigger("Death"); // Activa la animación de muerte al quedarse sin oxígeno
+                if(!audioSource.isPlaying)
+                    audioSource.PlayOneShot(sonidoMuerte);
                 death = true; // Marca que el jugador ha muerto para evitar que se active la animación varias veces
                 StartCoroutine(EfectoFinJuego());
             }            

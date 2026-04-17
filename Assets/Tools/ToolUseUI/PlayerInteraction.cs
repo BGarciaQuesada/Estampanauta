@@ -18,6 +18,12 @@ public class PlayerInteraction : MonoBehaviour
 
     public UIProgressBar progressBar; // esto se asigna desde el inspector
 
+    public AudioSource ItemsSFX;
+    public AudioClip sonidoRecogeObjeto;
+    public AudioClip sonidoRecogeLiquido;
+    public AudioClip sueltaObjeto;//TE QUEDAS POR AQUI
+    public AudioClip[] sonidosPicar;
+
     //ESTO ES NUEVO
 
     public GameObject objetoEnMano; // Variable para verificar si el jugador tiene un objeto en la mano

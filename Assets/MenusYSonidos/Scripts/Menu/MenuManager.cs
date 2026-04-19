@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour
     [Header("Paneles del Menu")]
     [SerializeField] private GameObject panelOpciones; // Panel de opciones
     [SerializeField] private GameObject panelMenuPrincipal; // Panel del menu principal
+    [SerializeField] private GameObject panelControles; // Panel de controles
 
     [Header("Audio")]
     [SerializeField] private AudioSource musicaMenu; // Fuente de audio para reproducir sonidos del menú
@@ -30,6 +31,7 @@ public class MenuManager : MonoBehaviour
             {
                 panelMenuPrincipal.SetActive(true); // Asegurarse de que el panel del menú principal esté activo al iniciar
                 panelOpciones.SetActive(false); // Asegurarse de que el panel de opciones esté desactivado al iniciar
+                panelControles.SetActive(false);
             }
 
             if(musicaMenu != null)
@@ -68,11 +70,21 @@ public class MenuManager : MonoBehaviour
         panelOpciones.SetActive(true); // Activar el panel de opciones
     }
 
+    public void AbrirControles()
+    {
+        if (panelMenuPrincipal != null)
+        {
+            panelMenuPrincipal.SetActive(false); // Desactivar el panel del menú principal
+        }
+        panelControles.SetActive(true); // Activar el panel de controles
+    }
+
     // Método para volver al menú principal desde el panel de opciones
     public void VolverAlMenu()
     {
         panelMenuPrincipal.SetActive(true); // Activar el panel del menú principal
         panelOpciones.SetActive(false); // Desactivar el panel de opciones
+        panelControles.SetActive(false);
     }
 
     public void Load()

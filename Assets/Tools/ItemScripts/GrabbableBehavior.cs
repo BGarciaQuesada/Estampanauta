@@ -11,10 +11,12 @@ public class GrabbableBehavior : MonoBehaviour
     private bool itemEquipped = false;
     public Collider colliderColision;   //hay que asignar el objeto Collider hijo
     private Rigidbody rb;
+    [SerializeField] private GameObject efectoBrillo; // Efecto de brillo para indicar que el objeto es agarrable
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        efectoBrillo = transform.Find("Brillo Objetos").gameObject; // Asignar el efecto de brillo desde el hijo del objeto
     }
     public void PickUpitem()
     {
@@ -51,15 +53,20 @@ public class GrabbableBehavior : MonoBehaviour
         if (other.CompareTag("Player") && !itemEquipped)
         {
             PickUpitem();
+            efectoBrillo.SetActive(false); // Desactivar el efecto de brillo al agarrar el objeto
+            PlayerInteraction pi = other.GetComponent<PlayerInteraction>();
+            pi.itemsSFX.PlayOneShot(pi.sonidoRecogeObjeto);
         }
     }
 
-    public void DropItem()
+    public void DropItem(Transform currentPlanet)
     {
         if (itemEquipped)
         {
             colliderColision.enabled = true; // Reactivar colisión para que el objeto pueda ser agarrado de nuevo
+            GetComponent<ItemGravityController>().currentPlanet = currentPlanet; // Asignar el planeta actual para que el objeto caiga correctamente
             StartCoroutine("CooldownPickUp");
+            efectoBrillo.SetActive(true); // Reactivar el efecto de brillo al soltar el objeto para indicar que es agarrable de nuevo
         }
     }
 

@@ -12,14 +12,22 @@ public class ObjectiveUI : MonoBehaviour
     {
         if (obj.required == 1)
         {
-            checkmark.SetActive(obj.IsComplete);
-            counterText.gameObject.SetActive(false);
+            if (checkmark != null)
+                checkmark.SetActive(obj.IsComplete);
+
+            if (counterText != null)
+                counterText.gameObject.SetActive(false);
         }
         else
         {
-            checkmark.SetActive(false);
-            counterText.gameObject.SetActive(true);
-            counterText.text = $"{obj.current}/{obj.required}";
+            if (checkmark != null)
+                checkmark.SetActive(false);
+
+            if (counterText != null)
+            {
+                counterText.gameObject.SetActive(true);
+                counterText.text = $"{obj.current}/{obj.required}";
+            }
         }
     }
 

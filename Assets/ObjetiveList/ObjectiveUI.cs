@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using TMPro;
 
+// Esta clase se encarga de actualizar el UI de un objetivo específico, mostrando un checkmark si es de 1 requerido o un contador si es de más de 1 requerido.
+// SE ASIGNA A CADA ELEMENTO DE LA LISTA
+
 public class ObjectiveUI : MonoBehaviour
 {
     [SerializeField] private string id;

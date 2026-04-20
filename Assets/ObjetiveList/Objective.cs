@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+// Esta clase almacena la información de un objeto especifico
+// Se emplea a través de ObjetiveUI y NO SE ASIGNA A NADA (es una plantilla, vamos)
+
 [Serializable]
 public class Objective
 {

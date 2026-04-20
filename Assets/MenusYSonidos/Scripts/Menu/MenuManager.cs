@@ -108,7 +108,7 @@ public class MenuManager : MonoBehaviour
             musicaMenu.Stop(); // Detener la musica de fondo
         }
 
-        SceneManager.LoadScene("Juego"); // Cargar la escena del nivel
+        SceneManager.LoadScene("CinematicaInicio"); // Cargar la escena del nivel
     }
 
     public void Salir()

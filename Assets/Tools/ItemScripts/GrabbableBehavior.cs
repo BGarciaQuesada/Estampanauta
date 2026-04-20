@@ -54,6 +54,8 @@ public class GrabbableBehavior : MonoBehaviour
         {
             PickUpitem();
             efectoBrillo.SetActive(false); // Desactivar el efecto de brillo al agarrar el objeto
+            PlayerInteraction pi = other.GetComponent<PlayerInteraction>();
+            pi.itemsSFX.PlayOneShot(pi.sonidoRecogeObjeto);
         }
     }
 

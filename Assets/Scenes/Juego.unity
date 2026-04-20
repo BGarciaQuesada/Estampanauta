@@ -49907,8 +49907,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 489315422}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7200704, y: 0.12670602, z: 0.19375058, w: 0.65414447}
-  m_LocalPosition: {x: -17.14, y: -1.41, z: 10.79}
+  m_LocalRotation: {x: 0.83631057, y: 0.0847606, z: 0.25443155, w: 0.47818917}
+  m_LocalPosition: {x: -16.96, y: -0.39, z: 10.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -49917,7 +49917,7 @@ Transform:
   - {fileID: 1840991801}
   - {fileID: 2095774468}
   m_Father: {fileID: 1539033156}
-  m_LocalEulerAnglesHint: {x: 116.752, y: -81.168, z: -75.582}
+  m_LocalEulerAnglesHint: {x: 130.826, y: -50.799988, z: -36.089996}
 --- !u!1 &489595689
 GameObject:
   m_ObjectHideFlags: 0
@@ -67175,6 +67175,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   holdDuration: 2
   progressBar: {fileID: 1036105123}
+  itemsSFX: {fileID: 687202208}
+  sonidoRecogeObjeto: {fileID: 8300000, guid: 54bdaceb1adf94a34bcf541a08e1387b, type: 3}
+  sonidoRecogeLiquido: {fileID: 8300000, guid: f65668996680a4b56a4f532cd260e037, type: 3}
+  sueltaObjeto: {fileID: 8300000, guid: 78ad99fd0a0a5144280b07bbdba84815, type: 3}
+  sonidoPicar: {fileID: 8300000, guid: 8b58d404874a68e4f8c33ea881c7a458, type: 3}
   objetoEnMano: {fileID: 0}
   dropOffset: {x: 2, y: 0, z: 0}
 --- !u!114 &687202184
@@ -67223,7 +67228,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: c87c3a812abe2fc4baa1fe54b4b77172, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1.7
@@ -67417,8 +67422,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 221cc92ff502735498aaae3c8bc79ecf, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -67514,8 +67519,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 02cf6aefb4bf84ebbafd7ecb053a064e, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

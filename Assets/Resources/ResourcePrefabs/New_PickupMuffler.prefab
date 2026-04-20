@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1c6bcff8208fa4c9cfe4fbe3f50a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Consumable
+  objectiveID: Scrap
 --- !u!114 &2618736299492755967
 MonoBehaviour:
   m_ObjectHideFlags: 0

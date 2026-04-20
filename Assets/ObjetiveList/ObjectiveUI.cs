@@ -8,23 +8,24 @@ public class ObjectiveUI : MonoBehaviour
 {
     [SerializeField] private string id;
 
-    [SerializeField] private GameObject checkmark; // ✔
+    // En principio las checkmarks iban a ser para objetivos individuales pero... no hay. Se queda ahí por si acaso.
+    // [SerializeField] private GameObject checkmark; // ✔
     [SerializeField] private TextMeshProUGUI counterText; // 0/X
 
     public void UpdateUI(Objective obj)
     {
         if (obj.required == 1)
         {
-            if (checkmark != null)
-                checkmark.SetActive(obj.IsComplete);
+            // if (checkmark != null)
+            // checkmark.SetActive(obj.IsComplete);
 
             if (counterText != null)
                 counterText.gameObject.SetActive(false);
         }
         else
         {
-            if (checkmark != null)
-                checkmark.SetActive(false);
+            //  if (checkmark != null)
+            // checkmark.SetActive(false);
 
             if (counterText != null)
             {

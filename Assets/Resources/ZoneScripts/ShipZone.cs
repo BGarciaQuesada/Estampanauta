@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 // Esta clase maneja el comportamiento de la zona de la nave, la cual recibe consumibles
 
@@ -39,10 +40,13 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         {
             Debug.Log("Consumible aplicado a la nave");
 
-            if (TryAdd("Crystal"))
+            string id = consumable.GetObjectiveID();
+
+            if (TryAdd(id))
             {
                 return true;
             }
+
         }
 
         // Si no se reconoce el item (aka no es un consumible), no se acepta
@@ -88,7 +92,8 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         objectives = new List<Objective>
     {
         new Objective { id = "Fuel", required = fuel, current = 0 },
-        new Objective { id = "Crystal", required = crystal, current = 0 }
+        new Objective { id = "Crystal", required = crystal, current = 0 },
+        new Objective { id = "Scrap", required = 2, current = 0 } // [!] Valor temporal, cambiar de ser necesario
     };
     }
 

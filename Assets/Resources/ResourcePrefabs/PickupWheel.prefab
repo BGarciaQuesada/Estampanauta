@@ -179,6 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
   grabPoint: {fileID: 0}
+  colliderColision: {fileID: 0}
 --- !u!114 &5550933985173339157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc1c6bcff8208fa4c9cfe4fbe3f50a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Consumable
+  objectiveID: Scrap
 --- !u!114 &-5793337180981040033
 MonoBehaviour:
   m_ObjectHideFlags: 0

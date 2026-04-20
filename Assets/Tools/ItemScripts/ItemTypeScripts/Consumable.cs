@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Consumable : MonoBehaviour, IItem
 {
+    // Necesito especificar el ID aquí temprano para que luego se puedan reconocer los distintos scraps como el mismo objetivo
+    [SerializeField] private string objectiveID; // "Crystal", "Scrap"
+
+    public string GetObjectiveID()
+    {
+        return objectiveID;
+    }
+
     public void UseOn(IItemReceiver receiver, GameObject user)
     {
         bool accepted = receiver.Receive(this, user);

@@ -42768,6 +42768,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2560326640575975122, guid: 118d420437bea2a44ae6aac02f355929, type: 3}
   m_PrefabInstance: {fileID: 424506748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &424552215 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 661864722603683548, guid: 2deca5083f0326a408b8812eba9f094b, type: 3}
+  m_PrefabInstance: {fileID: 6344502178591673356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &424608290
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209589,6 +209600,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6484826074450545915, guid: 2deca5083f0326a408b8812eba9f094b, type: 3}
+      propertyPath: textoLleno
+      value: 
+      objectReference: {fileID: 424552215}
     - target: {fileID: 7571364509042712118, guid: 2deca5083f0326a408b8812eba9f094b, type: 3}
       propertyPath: m_Name
       value: FloatingTextPanel

@@ -19,6 +19,11 @@ public class PlayerInteraction : MonoBehaviour
     public UIProgressBar progressBar; // esto se asigna desde el inspector
 
     //ESTO ES NUEVO
+    public AudioSource itemsSFX;
+    public AudioClip sonidoRecogeObjeto;
+    public AudioClip sonidoRecogeLiquido;
+    public AudioClip sueltaObjeto;
+    public AudioClip sonidoPicar;
 
     public GameObject objetoEnMano; // Variable para verificar si el jugador tiene un objeto en la mano
     [Header("Drop")]
@@ -135,8 +140,14 @@ public class PlayerInteraction : MonoBehaviour
         Debug.Log("entro");
         CancelHold();
         
-        Debug.Log(currentReceiver);
+        //Debug.Log(currentReceiver);
         heldItem.UseOn(currentReceiver, this.gameObject);
+        
+        //sonidos
+        if (objetoEnMano.GetComponent<Bucket>() != null)
+            itemsSFX.PlayOneShot(sonidoRecogeLiquido);
+        else if (objetoEnMano.GetComponent<Tool>())
+            itemsSFX.PlayOneShot(sonidoPicar);
         Debug.Log("salgo");
     }
 
@@ -150,7 +161,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (objetoEnMano == null)
             return;
-        objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
+        itemsSFX.PlayOneShot(sueltaObjeto);
+        objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(GetComponent<PlayerController>().currentPlanet); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
         objetoEnMano = null;    //pa poder coger mas
         heldItem = null; // Limpiar el item que se tiene en la mano al soltarlo
     }

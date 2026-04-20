@@ -76815,17 +76815,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2560326640575975122, guid: 118d420437bea2a44ae6aac02f355929, type: 3}
   m_PrefabInstance: {fileID: 785784197}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &785856918 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8040948748418480221, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-  m_PrefabInstance: {fileID: 3885143362417746420}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc846a452d7e69d40b09af3a57e6242c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ObjectiveUI
 --- !u!1 &786014447
 GameObject:
   m_ObjectHideFlags: 0
@@ -208562,14 +208551,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 814765854}
     m_Modifications:
-    - target: {fileID: 1706658166235852297, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_text
-      value: Cristales
-      objectReference: {fileID: 0}
-    - target: {fileID: 1865282967975005004, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_text
-      value: Gasolina
-      objectReference: {fileID: 0}
     - target: {fileID: 3526896769497343431, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -208650,65 +208631,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3775364972980682736, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_text
-      value: Chatarra
-      objectReference: {fileID: 0}
-    - target: {fileID: 4380807189327020096, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -262.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 4380807189327020096, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.000061035156
-      objectReference: {fileID: 0}
-    - target: {fileID: 4380807189327020096, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 106
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548518603957173797, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 284.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 4548518603957173797, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -42.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 5861912886399725023, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: objectiveUis.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5861912886399725023, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: 'objectiveUis.Array.data[2]'
-      value: 
-      objectReference: {fileID: 785856918}
-    - target: {fileID: 6031975373387916917, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -262.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 6031975373387916917, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.1021118
-      objectReference: {fileID: 0}
-    - target: {fileID: 6031975373387916917, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
-      objectReference: {fileID: 0}
     - target: {fileID: 7187905058633228902, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
       propertyPath: m_Name
       value: ObjectivesPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 8040948748418480221, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: id
-      value: Scrap
-      objectReference: {fileID: 0}
-    - target: {fileID: 8621555144544262146, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 284.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 8621555144544262146, guid: b88f97a28dc619544b2a6dc9c9b50afc, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -42.11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 905526065385387818}
   - component: {fileID: 661864722603683548}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Texto lleno
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -39}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.1000061}
+  m_SizeDelta: {x: 0, y: -0.19999695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &905526065385387818
 CanvasRenderer:
@@ -173,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -45, y: 317}
-  m_SizeDelta: {x: -1451.9513, y: -929.9944}
+  m_AnchoredPosition: {x: -4, y: 136}
+  m_SizeDelta: {x: -817.91, y: -339.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7688392238206289743
 CanvasRenderer:
@@ -226,6 +226,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d94bc9f42690544a34b338c111ba27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloatingText
-  text: {fileID: 661864722603683548}
+  textoLleno: {fileID: 661864722603683548}
   moveSpeed: 30
   duration: 1

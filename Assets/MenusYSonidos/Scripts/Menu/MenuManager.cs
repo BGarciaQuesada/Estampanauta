@@ -23,9 +23,11 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         //int SceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex; // Obtener el índice de la escena actual
+        CinemInicio();
+        CinemVictoria(); // Llamar al método para manejar la cinemática de victoria si estamos en esa escena
 
-        // Si estamos en el menu de inicio
-         if (SceneManager.GetActiveScene().name == "Menu")
+                         // Si estamos en el menu de inicio
+        if (SceneManager.GetActiveScene().name == "Menu")
         {
             if (panelMenuPrincipal != null && panelOpciones != null)
             {
@@ -49,6 +51,8 @@ public class MenuManager : MonoBehaviour
             ActualizarVolumen(volumenActual); // Actualizar el volumen de la musica
             sliderVolumen.onValueChanged.AddListener(ActualizarVolumen); // Agregar un listener para actualizar el volumen cuando el slider cambie
         }
+
+
 
     }
 
@@ -129,6 +133,34 @@ public class MenuManager : MonoBehaviour
     public void VolverAlMenuPrincipal()
     {
         SceneManager.LoadScene("Menu");
+    }
+
+    public void CinemVictoria()
+    {
+        if(SceneManager.GetActiveScene().name == "CinemVictoria")
+        {
+            StartCoroutine(IrAMenuPrincipal()); // Esperar 5 segundos antes de cargar el menú principal
+        }
+    }
+
+    IEnumerator IrAMenuPrincipal()
+    {
+        yield return new WaitForSeconds(13.5f); // Esperar el tiempo especificado antes de continuar con la ejecución del código siguiente
+        VolverAlMenuPrincipal(); // Llamar al método para volver al menú principal después de la espera
+    }
+
+    public void CinemInicio()
+    {
+        if (SceneManager.GetActiveScene().name == "CinematicaInicio")
+        {
+            StartCoroutine(EmpezarJuego()); // Esperar 5 segundos antes de cargar el nivel
+        }
+    }
+
+    IEnumerator EmpezarJuego()
+    {
+        yield return new WaitForSeconds(24f); // Esperar el tiempo especificado antes de continuar con la ejecución del código siguiente
+        SceneManager.LoadScene("Juego");
     }
 
 }

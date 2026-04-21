@@ -4,12 +4,10 @@ using UnityEngine;
 public class EnemyStandardNPC : MonoBehaviour
 {
     private Rigidbody rb;
-    [SerializeField] private bool isChasingTarget = false;
-    [SerializeField] private bool isInVisionRange = false;
 
     [Header("NORMAL ATTRIBUTES")]
     public int hitpoints = 3;
-    public float speed = 5.0F;
+    public float speed = 2.5F;
     public float rotationSpeed = 5.0F;
 
     [Header("PATROLLING")]
@@ -24,7 +22,10 @@ public class EnemyStandardNPC : MonoBehaviour
     [Header("CHASING")]
     public Transform targetToChase;
     public float chaseStopDistance = 1F;
-    private float chasingSpeed = 7.5F;
+    private float chasingSpeed = 4.5F;
+
+    [SerializeField] private bool isChasingTarget = false;
+    [SerializeField] private bool isInVisionRange = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -101,4 +102,5 @@ public class EnemyStandardNPC : MonoBehaviour
     {
         isChasingTarget = chasing;
     }
+
 }

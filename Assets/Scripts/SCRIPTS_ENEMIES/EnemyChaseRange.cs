@@ -15,6 +15,7 @@ public class EnemyChaseRange : MonoBehaviour
         {
             npc.targetToChase = null;
             npc.SetChasing(false);
+            Debug.Log(other.ToString() + " OUT OF CHASING RANGE. BACK TO PATROL.");
         }
     }
 }

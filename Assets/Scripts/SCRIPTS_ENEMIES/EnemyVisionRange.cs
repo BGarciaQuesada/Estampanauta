@@ -15,6 +15,7 @@ public class EnemyVisionRange : MonoBehaviour
         {
             npc.targetToChase = other.transform;
             npc.SetChasing(true);
+            Debug.Log(other.ToString() + "IN VISION RANGE. CHASE");
         }
     }
 }

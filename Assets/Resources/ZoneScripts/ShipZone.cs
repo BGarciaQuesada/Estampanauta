@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 // Esta clase maneja el comportamiento de la zona de la nave, la cual recibe consumibles
@@ -31,6 +32,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
             {
                 bucket.Empty();
                 Debug.Log("Cubo vaciado");
+                CheckVictory();
                 return true;
             }
         }
@@ -44,6 +46,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 
             if (TryAdd(id))
             {
+                CheckVictory();
                 return true;
             }
 
@@ -83,6 +86,16 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         return true;
     }
 
+    private void CheckVictory()
+    {
+        bool allComplete = objectives.TrueForAll(o => o.IsComplete);
+        if (allComplete)
+        {
+            Debug.Log("Todos los objetivos completados. Cargando escena de victoria...");
+            SceneManager.LoadScene("CinemVictoria"); // Asegúrate de que el nombre coincide con tu escena de victoria
+        }
+    }
+
     // --- UI ---
     private void GenerateObjectives()
     {
@@ -113,11 +126,4 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         }
     }
 
-    private void NewObjetives()
-    {
-        foreach (var obj in objectives)
-        {
-            
-        }
-    }
 }

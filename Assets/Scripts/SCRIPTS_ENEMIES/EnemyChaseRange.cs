@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyChaseRange : MonoBehaviour
@@ -11,10 +12,10 @@ public class EnemyChaseRange : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && npc.isChasingTarget)
         {
             npc.targetToChase = null;
-            npc.SetChasing(false);
+            npc.isChasingTarget = false;
             Debug.Log(other.ToString() + " OUT OF CHASING RANGE. BACK TO PATROL.");
         }
     }

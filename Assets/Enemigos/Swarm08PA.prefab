@@ -233,9 +233,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8146312937407245381}
+  - component: {fileID: 4911928773504914532}
   - component: {fileID: 4942228924966908530}
   - component: {fileID: 3666824859479105045}
-  - component: {fileID: 4911928773504914532}
   - component: {fileID: 4711092424022648278}
   - component: {fileID: 8373616116551221608}
   m_Layer: 0
@@ -264,6 +264,28 @@ Transform:
   - {fileID: 632219549186268932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &4911928773504914532
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922398658454899873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: aa154e9fd2c241ef97254e0195862deb, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!54 &4942228924966908530
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -314,28 +336,6 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 2
   m_Center: {x: 0, y: 0.4, z: -0.16}
---- !u!95 &4911928773504914532
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2922398658454899873}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: aa154e9fd2c241ef97254e0195862deb, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4711092424022648278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +349,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyGravity
   planet: {fileID: 0}
+  gravityValue: 9.81
 --- !u!114 &8373616116551221608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,21 +362,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d7a2699da1d36745ba3f8ecc52d6b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStandardNPC
-  isChasingTarget: 0
-  isInVisionRange: 0
   hitpoints: 3
   speed: 5
   rotationSpeed: 5
-  destinationList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  destinationList: []
   patrolStopDistance: 1
   secondsPauseInBetween: 1.5
   targetToChase: {fileID: 0}
-  chaseStopDistance: 1
+  chaseStopDistance: 0
 --- !u!1 &3339985898811249495
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632219549186268932}
   - component: {fileID: 9149710279399186456}
-  - component: {fileID: 2443360984727749336}
+  - component: {fileID: 4066382695507281948}
   m_Layer: 0
   m_Name: ChaseRange
   m_TagString: Untagged
@@ -857,7 +851,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2443360984727749336
+--- !u!114 &4066382695507281948
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -866,9 +860,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8881805671609557993}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c863e10c84101944909de3a29048cce, type: 3}
+  m_Script: {fileID: 11500000, guid: e24e86d64c63c214aa857f5f0bc34b62, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyVisionRange
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyChaseRange
 --- !u!1 &8962236494492524307
 GameObject:
   m_ObjectHideFlags: 0

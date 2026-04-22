@@ -907,7 +907,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -920,7 +920,7 @@ Transform:
   m_GameObject: {fileID: 960348691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.28, y: 49.8, z: -4.40358}
+  m_LocalPosition: {x: 5.75, y: 48.53, z: -15.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1085,6 +1085,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2879850687860897014, guid: c2b4f976d65c4864a9377cbfb9c2c65f, type: 3}
+      propertyPath: m_Radius
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2922398658454899873, guid: c2b4f976d65c4864a9377cbfb9c2c65f, type: 3}
       propertyPath: m_Name
       value: Swarm08PA
@@ -1146,6 +1150,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8373616116551221608, guid: c2b4f976d65c4864a9377cbfb9c2c65f, type: 3}
+      propertyPath: destinationList.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373616116551221608, guid: c2b4f976d65c4864a9377cbfb9c2c65f, type: 3}
       propertyPath: 'destinationList.Array.data[0]'
       value: 
       objectReference: {fileID: 745451763}
@@ -1165,6 +1173,10 @@ PrefabInstance:
       propertyPath: 'destinationList.Array.data[4]'
       value: 
       objectReference: {fileID: 253937004}
+    - target: {fileID: 9149710279399186456, guid: c2b4f976d65c4864a9377cbfb9c2c65f, type: 3}
+      propertyPath: m_Radius
+      value: 16
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1194,6 +1206,22 @@ PrefabInstance:
       propertyPath: 'destinationList.Array.data[1]'
       value: 
       objectReference: {fileID: 253937004}
+    - target: {fileID: 157847186061484281, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 157847186061484281, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 157847186061484281, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 157847186061484281, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3652149626831136200, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
       propertyPath: m_Name
       value: Swarm09PA
@@ -1204,11 +1232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4140438370282198546, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.17522
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4140438370282198546, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 48.7
+      value: 49.27
       objectReference: {fileID: 0}
     - target: {fileID: 4140438370282198546, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1246,6 +1274,10 @@ PrefabInstance:
       propertyPath: planet
       value: 
       objectReference: {fileID: 600041424}
+    - target: {fileID: 7042041206746598277, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
+      propertyPath: gravityValue
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

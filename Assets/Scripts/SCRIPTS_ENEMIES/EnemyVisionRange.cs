@@ -13,8 +13,8 @@ public class EnemyVisionRange : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            npc.targetToChase = other.transform;
-            npc.SetChasing(true);
+            npc.targetToChase = other.transform.gameObject;
+            npc.isChasingTarget = true;
             Debug.Log(other.ToString() + "IN VISION RANGE. CHASE");
         }
     }

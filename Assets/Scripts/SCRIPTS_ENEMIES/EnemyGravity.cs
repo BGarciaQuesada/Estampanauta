@@ -12,6 +12,7 @@ public class EnemyGravity : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
     }
 
     // Update is called once per frame
@@ -22,7 +23,5 @@ public class EnemyGravity : MonoBehaviour
         Vector3 gravityDirection = (planet.transform.position - transform.position).normalized;
         rb.AddForce(gravityDirection * gravityValue, ForceMode.Acceleration);
         transform.rotation = Quaternion.FromToRotation(transform.up, -gravityDirection) * transform.rotation;
-
-        Debug.Log(Physics.gravity.ToString());
     }
 }

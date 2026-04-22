@@ -13,19 +13,23 @@ public class EnemyStandardNPC : MonoBehaviour
     [Header("PATROLLING")]
     public Transform[] destinationList;
     public float patrolStopDistance = 1F;
-    public float secondsPauseInBetween = 1.5F;
+    public float secondsPausePatrol = 1.5F;
 
     private int currentPatrolIndex = 0;
     private bool doWait = false;
     private Coroutine patrolWait;
 
     [Header("CHASING")]
-    public Transform targetToChase;
+    public GameObject targetToChase;
     public float chaseStopDistance = 1F;
     private float chasingSpeed = 4.5F;
 
-    [SerializeField] private bool isChasingTarget = false;
-    [SerializeField] private bool isInVisionRange = false;
+    [SerializeField] private bool _isChasingTarget = false;
+    public GameObject hitFXPrefab;
+
+    public bool isChasingTarget { get => _isChasingTarget; set => _isChasingTarget = value; }
+
+    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,7 +41,7 @@ public class EnemyStandardNPC : MonoBehaviour
     void FixedUpdate()
     {
         if (isChasingTarget)
-            Chase(destinationList[currentPatrolIndex]);
+            Chase(targetToChase);
         else if (!doWait)
             Patrol();
     }
@@ -48,36 +52,41 @@ public class EnemyStandardNPC : MonoBehaviour
 
         Transform target = destinationList[currentPatrolIndex];
 
-        MoveTo(target.position, patrolStopDistance);
+        MoveTo(target.position, speed, patrolStopDistance);
 
         if (Vector3.Distance(transform.position, target.position) < patrolStopDistance)
         {
             currentPatrolIndex = (currentPatrolIndex + 1) % destinationList.Length;
-            doWait = true;
-            patrolWait = StartCoroutine(DoPatrolWait());
+            
+            if (patrolWait != null)
+            {
+                StopCoroutine(DoWait(secondsPausePatrol));
+                patrolWait = null;
+            }
+            patrolWait = StartCoroutine(DoWait(secondsPausePatrol));
         }
     }
-    private IEnumerator DoPatrolWait()
+    private IEnumerator DoWait(float seconds)
     {
-        yield return new WaitForSecondsRealtime(secondsPauseInBetween);
+        doWait = true;
+        yield return new WaitForSecondsRealtime(seconds);
         doWait = false;
     }
 
-    void Chase(Transform target)
+    void Chase(GameObject target)
     {
         if (patrolWait != null)
         {
+            Debug.Log("Stop patrol and Chasing");
             StopCoroutine(patrolWait);
             patrolWait = null;
         }
-        if (Vector3.Distance(transform.position, target.position) < chaseStopDistance)
-            isChasingTarget = false;
 
-        MoveTo(target.position, chasingSpeed);
+        MoveTo(target.transform.position, chasingSpeed, chaseStopDistance);
     }
 
 
-    void MoveTo(Vector3 position, float distanceToStop)
+    void MoveTo(Vector3 position, float speed, float distanceToStop)
     {
         if (destinationList == null || destinationList.Length <= 0) return;
         if (Vector3.Distance(transform.position, destinationList[currentPatrolIndex].position) < distanceToStop) return;
@@ -98,9 +107,19 @@ public class EnemyStandardNPC : MonoBehaviour
         // dirLocal.x y dirLocal.z ya son relativos al NPC
     }
 
-    public void SetChasing(bool chasing)
+
+
+
+
+    //public Player player;
+
+    private void OnCollisionEnter(Collision collision)
     {
-        isChasingTarget = chasing;
+        if (!collision.gameObject.CompareTag("Player")) return;
+
+        //player.GetDamage()
+
+        Instantiate(hitFXPrefab, gameObject.transform.position, Quaternion.identity);
     }
 
 }

@@ -54,8 +54,9 @@ public class Energia : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             timer -= 10;
-            GameObject fx = Instantiate(sparksFXPrefab, transform.position, Quaternion.identity, transform);
-            fx.transform.SetParent(transform);
+            
+            GameObject fx = Instantiate(sparksFXPrefab, transform.position, Quaternion.identity);
+            fx.transform.SetParent(GetComponent<RagdollControl>().pelvis);
             fx.transform.localScale = Vector3.one * 2;
             Destroy(fx, 2F);
         }

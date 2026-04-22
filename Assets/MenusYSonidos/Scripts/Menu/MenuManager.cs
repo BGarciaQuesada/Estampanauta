@@ -19,6 +19,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Slider sliderVolumen; // Slider para controlar el volumen de la música del menú
     [SerializeField] private float volumenActual = 1f; // Variable para almacenar el volumen actual de la música del menú
 
+    [Header("Panel Fade)")]
+    public GameObject panel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -161,6 +164,14 @@ public class MenuManager : MonoBehaviour
     {
         yield return new WaitForSeconds(24f); // Esperar el tiempo especificado antes de continuar con la ejecución del código siguiente
         SceneManager.LoadScene("Juego");
+    }
+
+    public IEnumerator FinJuego()
+    {
+        panel.SetActive(true); // Activar el panel de fin de juego para mostrar la pantalla de victoria o derrota
+        yield return new WaitForSeconds(3f); // Esperar el tiempo especificado antes de continuar con la ejecución del código siguiente
+        SceneManager.LoadScene("Menu"); // Cargar el menú principal después de la espera
+
     }
 
 }

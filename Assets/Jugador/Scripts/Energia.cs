@@ -19,6 +19,8 @@ public class Energia : MonoBehaviour
 
     public GameObject sparksFXPrefab;
 
+    public MenuManager menuManager; // Referencia al MenuManager para llamar a la función de fade out
+
     private void Update()
     {
         timer -= Time.deltaTime;
@@ -36,6 +38,7 @@ public class Energia : MonoBehaviour
                     audioSource.PlayOneShot(sonidoMuerte);
                 death = true; // Marca que el jugador ha muerto para evitar que se active la animaci�n varias veces
                 StartCoroutine(EfectoFinJuego());
+
             }            
             //pantalla fin juego
         }
@@ -68,6 +71,8 @@ public class Energia : MonoBehaviour
         efectoFinEnergia.SetActive(true);
         yield return new WaitForSeconds(2f);
         efectoFinEnergia.SetActive(false);
+
+        StartCoroutine(menuManager.FinJuego());
     }
     
     IEnumerator EfectoCargaEnergia()

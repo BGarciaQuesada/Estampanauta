@@ -22,7 +22,7 @@ public class EnemyStandardNPC : MonoBehaviour
     [Header("CHASING")]
     public GameObject targetToChase;
     public float chaseStopDistance = 1F;
-    private float chasingSpeed = 4.5F;
+    public float chasingSpeed = 4.5F;
 
     [SerializeField] private bool _isChasingTarget = false;
     public GameObject hitFXPrefab;

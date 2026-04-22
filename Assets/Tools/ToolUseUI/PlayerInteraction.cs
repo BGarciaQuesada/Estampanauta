@@ -10,6 +10,7 @@ public class PlayerInteraction : MonoBehaviour
 {
     private IItem heldItem;                     // Esto se lo tiene que asignar PlayerController (llamando a GrabbableBehavior)
     private IItemReceiver currentReceiver;
+    private IItemReceiver lockedReceiver;
 
     [SerializeField] private float holdDuration = 2f; // TIEMPO GLOBAL DE USO DE COSAS
 
@@ -33,10 +34,10 @@ public class PlayerInteraction : MonoBehaviour
     private void Start()
     {
         var playerInput = GetComponent<PlayerInput>();
-        if(playerInput != null)
+        if (playerInput != null)
         {
             soltarAction = playerInput.actions.FindAction("Soltar", throwIfNotFound: false);
-            if(soltarAction != null)
+            if (soltarAction != null)
             {
                 soltarAction.performed += OnSoltarPerformed;
                 soltarAction.Enable();
@@ -62,7 +63,7 @@ public class PlayerInteraction : MonoBehaviour
         IItemReceiver receiver = other.GetComponent<IItemReceiver>();
 
         //esto es pq si el player sale de la zona mientras recarga la barra de interacción da error
-        StartCoroutine(SaleDeZona(receiver));   
+        StartCoroutine(SaleDeZona(receiver));
     }
     IEnumerator SaleDeZona(IItemReceiver receiver)
     {
@@ -71,6 +72,9 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentReceiver = null;
             Debug.Log("Fuera de zona");
+
+            // Si está fuera de zona, automáticamente cancelar la interacción en curso
+            CancelHold();
         }
     }
 
@@ -103,6 +107,12 @@ public class PlayerInteraction : MonoBehaviour
 
         if (!isHolding) return;
 
+        if (heldItem == null || lockedReceiver == null)
+        {
+            CancelHold();
+            return;
+        }
+
         holdTimer += Time.deltaTime;
 
         progressBar.SetProgress(holdTimer / holdDuration);
@@ -117,6 +127,10 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.Log("Entro en StartHold");
         if (heldItem == null || currentReceiver == null) return;
+        if (isHolding) return;
+
+        lockedReceiver = currentReceiver; // Bloqueamos el receptor actual para evitar que cambie mientras se mantiene la interacción
+        // (Esto hacia que se ejecutaba el hold en la nave y luego se desplazaba, se bugueaba porque el item se usaba en el vacío en vez de en la nave)
 
         isHolding = true;
         holdTimer = 0f;
@@ -132,22 +146,37 @@ public class PlayerInteraction : MonoBehaviour
         isHolding = false;
         holdTimer = 0f;
 
+        lockedReceiver = null; // limpiar
+
         progressBar.Hide();
+        progressBar.SetProgress(0f);
     }
 
     void CompleteInteraction()
     {
         Debug.Log("entro");
+
+        if (lockedReceiver == null)
+        {
+            Debug.LogWarning("No hay receiver al completar interacción");
+            CancelHold();
+            return;
+        }
+
+        // USAR ANTES DE LIMPIAR
+        heldItem.UseOn(lockedReceiver, this.gameObject);
+
+        // sonidos
+        if (objetoEnMano != null)
+        {
+            if (objetoEnMano.GetComponent<Bucket>() != null)
+                itemsSFX.PlayOneShot(sonidoRecogeLiquido);
+            else if (objetoEnMano.GetComponent<Tool>() != null)
+                itemsSFX.PlayOneShot(sonidoPicar);
+        }
+
         CancelHold();
-        
-        //Debug.Log(currentReceiver);
-        heldItem.UseOn(currentReceiver, this.gameObject);
-        
-        //sonidos
-        if (objetoEnMano.GetComponent<Bucket>() != null)
-            itemsSFX.PlayOneShot(sonidoRecogeLiquido);
-        else if (objetoEnMano.GetComponent<Tool>())
-            itemsSFX.PlayOneShot(sonidoPicar);
+
         Debug.Log("salgo");
     }
 
@@ -165,5 +194,8 @@ public class PlayerInteraction : MonoBehaviour
         objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(GetComponent<PlayerController>().currentPlanet); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
         objetoEnMano = null;    //pa poder coger mas
         heldItem = null; // Limpiar el item que se tiene en la mano al soltarlo
+
+        // Si el jugador suelta el objeto mientras está en una zona de interacción, cancelar la interacción en curso
+        CancelHold();
     }
 }

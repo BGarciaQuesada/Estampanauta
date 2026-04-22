@@ -67,7 +67,7 @@ public class PlayerInteraction : MonoBehaviour
     }
     IEnumerator SaleDeZona(IItemReceiver receiver)
     {
-        yield return new WaitForSeconds(1f); // Espera medio segundo para evitar problemas de colisiones rápidas
+        yield return new WaitForSeconds(.1F); // Espera medio segundo para evitar problemas de colisiones rápidas
         if (receiver != null && receiver == currentReceiver)
         {
             currentReceiver = null;

@@ -11,6 +11,7 @@ public class RagdollControl : MonoBehaviour
     public Vector3 fuerza;
     public Animator animator;
     private PlayerController playerController; // Referencia al script PlayerController para controlar el movimiento del jugador
+    private bool quitandoEnergia = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -66,12 +67,17 @@ public class RagdollControl : MonoBehaviour
     {
         yield return new WaitForSeconds(tiempo);
         DesactivaRagdoll(); // Desactiva el Ragdoll después de un tiempo
+        quitandoEnergia = false; // Permite que se vuelva a quitar energía al colisionar con un enemigo después de desactivar el Ragdoll
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            if (quitandoEnergia)
+                return;
+            quitandoEnergia = true;
+            Debug.Log("quito 10");
             GetComponent<Energia>().timer -= 10f; // Resta 10 segundos al tiempo de oxígeno al colisionar con un enemigo
             ActivaRagdoll(); // Activa el Ragdoll al presionar la tecla K
             if (GetComponent<Energia>().timer < 0)

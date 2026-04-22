@@ -51,15 +51,15 @@ public class Energia : MonoBehaviour
             timer = tiempoMax; //devuelve el tiempo a su valor m�ximo al entrar en el trigger con el tag "Respawn"
             StartCoroutine(EfectoCargaEnergia());
         }
-        if (other.CompareTag("Enemy"))
-        {
-            timer -= 10;
+        //if (other.CompareTag("Enemy"))
+        //{
+        //    timer -= 10;
             
-            GameObject fx = Instantiate(sparksFXPrefab, transform.position, Quaternion.identity);
-            fx.transform.SetParent(GetComponent<RagdollControl>().pelvis);
-            fx.transform.localScale = Vector3.one * 2;
-            Destroy(fx, 2F);
-        }
+        //    GameObject fx = Instantiate(sparksFXPrefab, transform.position, Quaternion.identity);
+        //    fx.transform.SetParent(GetComponent<RagdollControl>().pelvis);
+        //    fx.transform.localScale = Vector3.one * 2;
+        //    Destroy(fx, 2F);
+        //}
     }
 
     private void ActivarRagdoll()

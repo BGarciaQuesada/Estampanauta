@@ -8,7 +8,7 @@ public class ObjectivesPanelInput : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) || (Input.GetButtonDown("Fire1")))
         {
             slidePanel.Toggle();
         }

@@ -88,10 +88,9 @@ public class EnemyStandardNPC : MonoBehaviour
 
     void MoveTo(Vector3 position, float speed, float distanceToStop)
     {
-        if (destinationList == null || destinationList.Length <= 0) return;
-        if (Vector3.Distance(transform.position, destinationList[currentPatrolIndex].position) < distanceToStop) return;
+        if (Vector3.Distance(transform.position, position) < distanceToStop) return;
 
-        Vector3 dirGlobal = destinationList[currentPatrolIndex].position - transform.position;
+        Vector3 dirGlobal = position - transform.position;
         Vector3 dirLocal = transform.InverseTransformDirection(dirGlobal);
         Vector3 movimiento = new Vector3(dirLocal.x, 0, dirLocal.z).normalized;
 
@@ -107,6 +106,26 @@ public class EnemyStandardNPC : MonoBehaviour
         // dirLocal.x y dirLocal.z ya son relativos al NPC
     }
 
+    //void MoveToTarget(Vector3 position, float speed, float distanceToStop)
+    //{
+    //    if (Vector3.Distance(transform.position, destinationList[currentPatrolIndex].position) < distanceToStop) return;
+
+    //    Vector3 dirGlobal = position - transform.position;
+    //    Vector3 dirLocal = transform.InverseTransformDirection(dirGlobal);
+    //    Vector3 movimiento = new Vector3(dirLocal.x, 0, dirLocal.z).normalized;
+
+    //    if (movimiento != Vector3.zero)
+    //    {
+    //        Quaternion targetRotation = Quaternion.LookRotation(transform.TransformDirection(movimiento), transform.up);
+    //        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+    //    }
+
+    //    Vector3 velocidadVertical = Vector3.Project(rb.linearVelocity, transform.up);
+    //    rb.linearVelocity = transform.TransformDirection(movimiento) * speed + velocidadVertical;
+
+    //    // dirLocal.x y dirLocal.z ya son relativos al NPC
+    //}
+
 
 
 
@@ -119,7 +138,7 @@ public class EnemyStandardNPC : MonoBehaviour
 
         //player.GetDamage()
 
-        Instantiate(hitFXPrefab, gameObject.transform.position, Quaternion.identity);
+        Destroy(Instantiate(hitFXPrefab, gameObject.transform.position, Quaternion.identity),.7F);
     }
 
 }

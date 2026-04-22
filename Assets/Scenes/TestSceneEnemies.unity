@@ -1274,10 +1274,6 @@ PrefabInstance:
       propertyPath: planet
       value: 
       objectReference: {fileID: 600041424}
-    - target: {fileID: 7042041206746598277, guid: 36aef3ef9906f8c46a368a53d0a8a155, type: 3}
-      propertyPath: gravityValue
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

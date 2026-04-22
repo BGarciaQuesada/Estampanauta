@@ -668,7 +668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &345034102
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3696,10 +3696,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 345034102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 88}
-  m_SizeDelta: {x: 851.5302, y: 1080}
+  m_AnchorMin: {x: 0.09743751, y: 0.21674074}
+  m_AnchorMax: {x: 0.90977085, y: 1}
+  m_AnchoredPosition: {x: -7, y: 2.7000122}
+  m_SizeDelta: {x: 0, y: -5.401184}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1869153970
 MonoBehaviour:
@@ -3721,7 +3721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: a27a06bbc295c604a84258661a84ebe8, type: 3}
+  m_Texture: {fileID: 2800000, guid: bddcbf876c6ef5a4ba8511af3b82a8b9, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

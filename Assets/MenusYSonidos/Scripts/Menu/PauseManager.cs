@@ -24,8 +24,9 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Input.GetKey(KeyCode.Joystick1Button7)); // Debug para verificar el input del botón Start del mando
         // Solo permite pulsar ESC si NO está en transición
-        if (Input.GetKeyDown(KeyCode.Escape) && !isTransitioning)
+        if ((Input.GetKeyDown(KeyCode.Escape) || (Input.GetButtonDown("Fire2"))) && !isTransitioning)
         {
             TogglePause();
         }

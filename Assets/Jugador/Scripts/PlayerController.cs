@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         if (canMove)
         {
             // SALTO CON ESPACIO
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
             {
                 Jump();
             }

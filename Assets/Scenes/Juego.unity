@@ -67535,6 +67535,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3219080377183215773, guid: 0f0d7aa6234ee2a419e46e709fa6c90d, type: 3}
+      propertyPath: sparksFXPrefab
+      value: 
+      objectReference: {fileID: 7045889733438899885, guid: 14078f8f7064d894fad9a68275c46f31, type: 3}
+    - target: {fileID: 3219080377183215773, guid: 0f0d7aa6234ee2a419e46e709fa6c90d, type: 3}
       propertyPath: efectoFinEnergia
       value: 
       objectReference: {fileID: 173409926}

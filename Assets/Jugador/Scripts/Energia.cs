@@ -17,22 +17,24 @@ public class Energia : MonoBehaviour
     public AudioClip sonidoMuerte;
     public AudioClip sonidoRecuperaBateria;
 
+    public GameObject sparksFXPrefab;
+
     private void Update()
     {
         timer -= Time.deltaTime;
         //textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
-        barraBateria.fillAmount = timer / tiempoMax; // Actualiza la barra de batería según el tiempo restante (valor entre 0 y 1)
+        barraBateria.fillAmount = timer / tiempoMax; // Actualiza la barra de baterï¿½a segï¿½n el tiempo restante (valor entre 0 y 1)
 
         if (timer <0)
         {
             timer = 0;
             if (!death)
             {
-                GetComponent<PlayerController>().canMove = false; // Detiene el movimiento del jugador al quedarse sin oxígeno
-                GetComponent<Animator>().SetTrigger("Death"); // Activa la animación de muerte al quedarse sin oxígeno
+                GetComponent<PlayerController>().canMove = false; // Detiene el movimiento del jugador al quedarse sin oxï¿½geno
+                GetComponent<Animator>().SetTrigger("Death"); // Activa la animaciï¿½n de muerte al quedarse sin oxï¿½geno
                 if(!audioSource.isPlaying)
                     audioSource.PlayOneShot(sonidoMuerte);
-                death = true; // Marca que el jugador ha muerto para evitar que se active la animación varias veces
+                death = true; // Marca que el jugador ha muerto para evitar que se active la animaciï¿½n varias veces
                 StartCoroutine(EfectoFinJuego());
             }            
             //pantalla fin juego
@@ -43,14 +45,22 @@ public class Energia : MonoBehaviour
     {
         if (other.CompareTag("Respawn"))
         {
-            timer = tiempoMax; //devuelve el tiempo a su valor máximo al entrar en el trigger con el tag "Respawn"
+            timer = tiempoMax; //devuelve el tiempo a su valor mï¿½ximo al entrar en el trigger con el tag "Respawn"
             StartCoroutine(EfectoCargaEnergia());
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            timer -= 10;
+            GameObject fx = Instantiate(sparksFXPrefab, transform.position, Quaternion.identity, transform);
+            fx.transform.SetParent(transform);
+            fx.transform.localScale = Vector3.one * 2;
+            Destroy(fx, 2F);
         }
     }
 
     private void ActivarRagdoll()
     {
-        GetComponent<RagdollControl>().ActivaRagdoll(); // Llama a la función para activar el Ragdoll
+        GetComponent<RagdollControl>().ActivaRagdoll(); // Llama a la funciï¿½n para activar el Ragdoll
     }
 
     IEnumerator EfectoFinJuego()
@@ -66,4 +76,8 @@ public class Energia : MonoBehaviour
         yield return new WaitForSeconds(2f);
         efectoRecuperaEnergia.SetActive(false);
     }
+
+    
+
+
 }

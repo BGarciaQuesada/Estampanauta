@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 // Esta clase maneja el agarrado y soltado de objetos.
 
@@ -27,6 +28,9 @@ public class GrabbableBehavior : MonoBehaviour
             if (player.objetoEnMano != null)
                 return;
 
+            efectoBrillo.SetActive(false); // Desactivar el efecto de brillo al agarrar el objeto            
+            player.itemsSFX.PlayOneShot(player.sonidoRecogeObjeto);
+
             itemEquipped = true;
             colliderColision.enabled = false; // Desactivar colisión para evitar problemas al agarrar el objeto
 
@@ -53,9 +57,7 @@ public class GrabbableBehavior : MonoBehaviour
         if (other.CompareTag("Player") && !itemEquipped)
         {
             PickUpitem();
-            efectoBrillo.SetActive(false); // Desactivar el efecto de brillo al agarrar el objeto
-            PlayerInteraction pi = other.GetComponent<PlayerInteraction>();
-            pi.itemsSFX.PlayOneShot(pi.sonidoRecogeObjeto);
+            
         }
     }
 

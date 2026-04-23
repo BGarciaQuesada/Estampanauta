@@ -169,7 +169,7 @@ public class MenuManager : MonoBehaviour
     public IEnumerator FinJuego()
     {
         panel.SetActive(true); // Activar el panel de fin de juego para mostrar la pantalla de victoria o derrota
-        yield return new WaitForSeconds(3f); // Esperar el tiempo especificado antes de continuar con la ejecución del código siguiente
+        yield return new WaitForSeconds(6f); // Esperar el tiempo especificado antes de continuar con la ejecución del código siguiente
         SceneManager.LoadScene("Menu"); // Cargar el menú principal después de la espera
 
     }

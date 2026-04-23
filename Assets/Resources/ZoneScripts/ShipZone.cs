@@ -99,8 +99,8 @@ public class ShipZone : MonoBehaviour, IItemReceiver
     // --- UI ---
     private void GenerateObjectives()
     {
-        int fuel = Random.Range(3, 8); // 3–7
-        int crystal = 10 - fuel;
+        int fuel = Random.Range(2, 4); // 2-3
+        int crystal = 5 - fuel;
 
         objectives = new List<Objective>
     {

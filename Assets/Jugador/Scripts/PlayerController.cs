@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerController : MonoBehaviour
 {
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //if(PhotonView.IsMine)
         if (canMove)
         {
             // SALTO CON ESPACIO

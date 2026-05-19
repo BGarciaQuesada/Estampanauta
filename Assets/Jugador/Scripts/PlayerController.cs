@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     public float rayCastLength = 2f;
     public float rotationSpeed = 5f;
@@ -67,21 +67,25 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(canMove)
+        if(photonView.IsMine)
         {
-            Movement();
-            Vector3 direccion = new Vector3(input.x, 0, input.z);
-
-            if (direccion.magnitude > 0.1f)
+            if (canMove)
             {
-                Quaternion rotacionObjetivo = Quaternion.LookRotation(direccion);
-                armature.transform.rotation = Quaternion.Slerp(transform.rotation, rotacionObjetivo, velocidadRotacion * Time.deltaTime);
-            }
-        }
-           
+                Movement();
+                Vector3 direccion = new Vector3(input.x, 0, input.z);
 
-        ApplyGravity();
-        ApplyPlanetRotation();
+                if (direccion.magnitude > 0.1f)
+                {
+                    Quaternion rotacionObjetivo = Quaternion.LookRotation(direccion);
+                    armature.transform.rotation = Quaternion.Slerp(transform.rotation, rotacionObjetivo, velocidadRotacion * Time.deltaTime);
+                }
+            }
+
+
+            ApplyGravity();
+            ApplyPlanetRotation();
+        }
+        
     }
 
     void Jump()

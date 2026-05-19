@@ -1,13 +1,14 @@
+using Fusion;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Energia : MonoBehaviour
+public class Energia : NetworkBehaviour
 {
     public GameObject efectoFinEnergia;
     public GameObject efectoRecuperaEnergia;
-    public float timer = 0;
+    [Networked] public float timer { get; set; }
     //public TextMeshProUGUI textoOxigeno;
     public float tiempoMax = 120f;
     public bool death = false;
@@ -21,9 +22,14 @@ public class Energia : MonoBehaviour
 
     public MenuManager menuManager; // Referencia al MenuManager para llamar a la función de fade out
 
+    private void Start()
+    {
+        timer = tiempoMax;
+        barraBateria = GameObject.Find("BarraOxigeno").transform.GetChild(1).GetComponent<Image>(); // Asegúrate de que el objeto "BarraBateria" tenga un componente Image
+    }
     private void Update()
     {
-        timer -= Time.deltaTime;
+        timer -= Runner.DeltaTime;
         //textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
         barraBateria.fillAmount = timer / tiempoMax; // Actualiza la barra de bater�a seg�n el tiempo restante (valor entre 0 y 1)
 

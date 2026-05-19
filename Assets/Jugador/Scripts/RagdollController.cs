@@ -1,7 +1,8 @@
+using Fusion;
 using System.Collections;
 using UnityEngine;
 
-public class RagdollControl : MonoBehaviour
+public class RagdollControl : NetworkBehaviour
 {
     public GameObject root;
     public Transform pelvis; // Objeto ra�z del Ragdoll (puede ser el pelvis o cualquier otro objeto que act�e como ra�z)

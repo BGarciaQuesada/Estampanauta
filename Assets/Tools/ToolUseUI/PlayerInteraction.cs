@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Fusion;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -6,7 +7,7 @@ using UnityEngine.InputSystem;
 // Esta clase DEBE APLICARSE A PLAYER!!! Maneja el coger y usar objetos al mantener pulsado el botón de interacción.
 // Se encarga de iniciar la acción, llamar a la barra de progreso y completar la acción cuando se alcanza el tiempo necesario.
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : NetworkBehaviour
 {
     private IItem heldItem;                     // Esto se lo tiene que asignar PlayerController (llamando a GrabbableBehavior)
     private IItemReceiver currentReceiver;
@@ -113,7 +114,7 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-        holdTimer += Time.deltaTime;
+        holdTimer += Runner.DeltaTime;
 
         progressBar.SetProgress(holdTimer / holdDuration);
 

@@ -1,8 +1,8 @@
+using Fusion;
 using System;
 using UnityEngine;
-using Photon.Pun;
 
-public class PlayerController : MonoBehaviourPunCallbacks
+public class PlayerController : NetworkBehaviour
 {
     public float rayCastLength = 2f;
     public float rotationSpeed = 5f;
@@ -45,11 +45,16 @@ public class PlayerController : MonoBehaviourPunCallbacks
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        MainCameraTransform = Camera.main.transform;
+        
 
         tmpGravity = gravity;
         tmpRotationSpeed = rotationSpeed;
         animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        MainCameraTransform = Camera.main.transform;
     }
 
     private void Update()
@@ -57,34 +62,39 @@ public class PlayerController : MonoBehaviourPunCallbacks
         //if(PhotonView.IsMine)
         if (canMove)
         {
-            // SALTO CON ESPACIO
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
-            {
-                Jump();
-            }
+            if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+                // SALTO CON ESPACIO
+                if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump"))
+                {
+                    Jump();
+                }
         }
     }
 
     private void FixedUpdate()
     {
-        if(photonView.IsMine)
+        if (canMove)
         {
-            if (canMove)
+            if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
             {
                 Movement();
                 Vector3 direccion = new Vector3(input.x, 0, input.z);
 
-                if (direccion.magnitude > 0.1f)
+                if (direccion.magnitude > 0.1f && this.gameObject.GetComponent<NetworkObject>().HasInputAuthority)
                 {
                     Quaternion rotacionObjetivo = Quaternion.LookRotation(direccion);
-                    armature.transform.rotation = Quaternion.Slerp(transform.rotation, rotacionObjetivo, velocidadRotacion * Time.deltaTime);
+                    armature.transform.rotation = Quaternion.Slerp(transform.rotation, rotacionObjetivo, velocidadRotacion * Time.fixedDeltaTime);
                 }
             }
+                
+        }
 
-
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+        {
             ApplyGravity();
             ApplyPlanetRotation();
         }
+            
         
     }
 
@@ -178,7 +188,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
                 transform.rotation = Quaternion.Slerp(
                 transform.rotation,
                 rotacionObjetivo,
-                velocidadRotacion * Time.deltaTime
+                velocidadRotacion * Runner.DeltaTime
                 );
             }
         }
@@ -200,7 +210,7 @@ public class PlayerController : MonoBehaviourPunCallbacks
     void ApplyPlanetRotation()
     {
         Quaternion targetRotation = Quaternion.FromToRotation(transform.up, normalVector) * transform.rotation;
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Runner.DeltaTime);
 
         if (isTouchingPlanetSurface && CanJump)
             rotationSpeed = tmpRotationSpeed;

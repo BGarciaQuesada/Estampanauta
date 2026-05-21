@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,10 +6,10 @@ using UnityEngine.UIElements;
 
 // Esta clase maneja el comportamiento de la zona de la nave, la cual recibe consumibles
 
-public class ShipZone : MonoBehaviour, IItemReceiver
+public class ShipZone : NetworkBehaviour, IItemReceiver
 {
     // [!] La nave necesita conocer la lista de objetivos para aceptar o no los items, y para actualizar el progreso de los objetivos
-    [SerializeField] private List<Objective> objectives;
+    //[Networked] private List<Objective> objectives { get; set;}
     public FloatingText feedbackText; // para "¡Lleno!"
 
     [SerializeField] private ObjectivesUIManager uiManager;
@@ -18,7 +19,10 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         GenerateObjectives();
         UpdateUI(); //para mostrar los objetivos pendientes al inicio 
     }
-
+    private void Update()
+    {
+        UpdateUI();
+    }
     public bool Receive(IItem item, GameObject user)
     {
         Debug.Log("RECIBEEEEEE");
@@ -61,7 +65,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
     // [!] a pesar de ser borrado, regresó??? Asumo que ha sido lio de ramas de git. Arreglado.
     bool TryAdd(string id)
     {
-        Objective obj = objectives.Find(o => o.id == id);
+        Objective obj = NetworkManager.instance.objectives.Find(o => o.id == id);
 
         if (obj == null)
         {
@@ -88,7 +92,7 @@ public class ShipZone : MonoBehaviour, IItemReceiver
 
     private void CheckVictory()
     {
-        bool allComplete = objectives.TrueForAll(o => o.IsComplete);
+        bool allComplete = NetworkManager.instance.objectives.TrueForAll(o => o.IsComplete);
         if (allComplete)
         {
             Debug.Log("Todos los objetivos completados. Cargando escena de victoria...");
@@ -99,15 +103,22 @@ public class ShipZone : MonoBehaviour, IItemReceiver
     // --- UI ---
     private void GenerateObjectives()
     {
-        int fuel = Random.Range(2, 4); // 2-3
-        int crystal = 5 - fuel;
+        if(!NetworkManager.instance.objetivosCreados)
+        {
+            NetworkManager.instance.objetivosCreados = true;
+            int fuel = Random.Range(2, 4); // 2-3
+            int crystal = 5 - fuel;
 
-        objectives = new List<Objective>
-    {
-        new Objective { id = "Fuel", required = fuel, current = 0 },
-        new Objective { id = "Crystal", required = crystal, current = 0 },
-        new Objective { id = "Scrap", required = 2, current = 0 } // [!] Valor temporal, cambiar de ser necesario
-    };
+            NetworkManager.instance.objectives = new List<Objective>
+            {
+                new Objective { id = "Fuel", required = fuel, current = 0 },
+                new Objective { id = "Crystal", required = crystal, current = 0 },
+                new Objective { id = "Scrap", required = 2, current = 0 } // [!] Valor temporal, cambiar de ser necesario
+            };
+
+
+        }
+        
     }
 
     void ShowFullMessage()
@@ -118,11 +129,11 @@ public class ShipZone : MonoBehaviour, IItemReceiver
         }
     }
 
-    void UpdateUI()
+    public void UpdateUI()
     {
         if (uiManager != null)
         {
-            uiManager.UpdateAll(objectives);
+            uiManager.UpdateAll(NetworkManager.instance.objectives);
         }
     }
 

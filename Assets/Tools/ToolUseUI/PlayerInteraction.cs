@@ -35,6 +35,8 @@ public class PlayerInteraction : NetworkBehaviour
     private void Start()
     {
         var playerInput = GetComponent<PlayerInput>();
+        progressBar = GameObject.Find("BorderItemUse").GetComponent<UIProgressBar>();
+        progressBar.gameObject.SetActive(false);
         if (playerInput != null)
         {
             soltarAction = playerInput.actions.FindAction("Soltar", throwIfNotFound: false);

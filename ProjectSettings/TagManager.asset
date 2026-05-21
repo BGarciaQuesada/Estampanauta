@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - Mano
   - Pick
+  - NetworkRunner
+  - BorderItemUse
+  - BarraVida
   layers:
   - Default
   - TransparentFX

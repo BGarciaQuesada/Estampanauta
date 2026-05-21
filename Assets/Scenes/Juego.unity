@@ -101823,7 +101823,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8713084557655794116, guid: 41a6dd7f9ee01ea45b4121d9979e2a77, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713084557655794116, guid: 41a6dd7f9ee01ea45b4121d9979e2a77, type: 3}
+      propertyPath: m_TagString
+      value: BorderItemUse
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -107496,6 +107500,7 @@ MonoBehaviour:
   currentPlanet: {fileID: 0}
   playerVisual: {fileID: 489595690}
   isTouchingPlanetSurface: 1
+  MainCameraTransform: {fileID: 0}
   CameraArmTransform: {fileID: 0}
   armature: {fileID: 0}
   velocidadRotacion: 5
@@ -220161,6 +220166,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4554759178413558820, guid: ad9ee9edfc740974b9e3683bb3f3067c, type: 3}
+      propertyPath: efectoBrillo
+      value: 
+      objectReference: {fileID: 777761648392338277}
+    - target: {fileID: 4554759178413558820, guid: ad9ee9edfc740974b9e3683bb3f3067c, type: 3}
       propertyPath: colliderColision
       value: 
       objectReference: {fileID: 1041371689}
@@ -220245,6 +220254,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad9ee9edfc740974b9e3683bb3f3067c, type: 3}
+--- !u!1 &777761648392338277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 767313971162750685, guid: ad9ee9edfc740974b9e3683bb3f3067c, type: 3}
+  m_PrefabInstance: {fileID: 777761648392338276}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1759407588286490570
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -220705,6 +220719,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarraOxigeno
       objectReference: {fileID: 0}
+    - target: {fileID: 1360620144644523562, guid: ab0611978c9d81e4da10ce54365d8b11, type: 3}
+      propertyPath: m_TagString
+      value: BarraVida
+      objectReference: {fileID: 0}
     - target: {fileID: 1688894484784944299, guid: ab0611978c9d81e4da10ce54365d8b11, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -220751,7 +220769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1688894484784944299, guid: ab0611978c9d81e4da10ce54365d8b11, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 1688894484784944299, guid: ab0611978c9d81e4da10ce54365d8b11, type: 3}
       propertyPath: m_LocalRotation.w

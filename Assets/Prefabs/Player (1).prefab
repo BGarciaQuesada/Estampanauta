@@ -3163,6 +3163,7 @@ MonoBehaviour:
   currentPlanet: {fileID: 0}
   playerVisual: {fileID: 8675786860565467495}
   isTouchingPlanetSurface: 0
+  MainCameraTransform: {fileID: 0}
   CameraArmTransform: {fileID: 0}
   armature: {fileID: 7300905929055611118}
   velocidadRotacion: 5
@@ -3193,7 +3194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Energia
   efectoFinEnergia: {fileID: 4334609273562492270}
   efectoRecuperaEnergia: {fileID: 4132732889488661451}
-  _timer: 0
+  timer: 0
   tiempoMax: 120
   death: 0
   barraBateria: {fileID: 0}
@@ -3708,7 +3709,6 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 3761036986654183254}
   - {fileID: 5308539966108707431}
-  - {fileID: 1174547223270679385}
   - {fileID: 2194731908667913821}
   - {fileID: -5094298043485004725}
   - {fileID: 846702549887213579}

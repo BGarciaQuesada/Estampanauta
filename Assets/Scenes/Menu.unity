@@ -1144,12 +1144,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb8e1a011128024cabd652e837fb351, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NetworkManager
-  instance: {fileID: 0}
   runnerPrefab: {fileID: 242376806735299626, guid: 25207c5871249dc40b5d161bbf48cc9a, type: 3}
-  playerCount: 3
+  jugadoresEnSala: 0
   playerPrefab: {fileID: 8032912139564193848, guid: 8ad450d3435e1874ea60c751276a8cde, type: 3}
   camera: {fileID: 2187195239699360065, guid: d17e43c8f5cfe4f4db5a1203bc5a83d9, type: 3}
   players: []
+  objetivosCreados: 0
   lobbyName: default
   sessionListContentParent: {fileID: 2040071908}
   sessionListEntryPrefab: {fileID: 9077936564986563096, guid: b4aad270c11b0b649b0019a659f4458a, type: 3}
@@ -1447,7 +1447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
   panelOpciones: {fileID: 2006846630}
-  panelMenuPrincipal: {fileID: 1064411453}
+  panelMenuPrincipal: {fileID: 0}
   panelControles: {fileID: 345034101}
   musicaMenu: {fileID: 229289913}
   musicaFondo: {fileID: 0}

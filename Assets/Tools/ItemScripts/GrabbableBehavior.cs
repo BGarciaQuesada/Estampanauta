@@ -55,6 +55,8 @@ public class GrabbableBehavior : MonoBehaviour
     {
         if (other.CompareTag("Player") && !itemEquipped)
         {
+            grabPoint = other.GetComponent<PlayerController>().mano;
+
             PickUpitem();
             
         }

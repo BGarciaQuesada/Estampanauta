@@ -9,6 +9,7 @@ public class FollowPlayer : NetworkBehaviour
     [UnityEngine.Range(.1f,1f)]
     public float followDamping;
     public Transform playerTransform;
+    public Camera mainCam;
 
     private void Start()
     {
@@ -22,8 +23,8 @@ public class FollowPlayer : NetworkBehaviour
     private void FixedUpdate()
     {
        
-        transform.position = Vector3.Lerp(transform.position, playerTransform.position, 1/followDamping * Runner.DeltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, playerTransform.rotation, 1/followDamping * Runner.DeltaTime);
+        transform.position = Vector3.Lerp(transform.position, playerTransform.position, 1/followDamping * Time.fixedDeltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, playerTransform.rotation, 1/followDamping * Time.fixedDeltaTime);
     }
 
 }

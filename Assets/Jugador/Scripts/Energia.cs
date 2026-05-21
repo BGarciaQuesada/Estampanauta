@@ -1,14 +1,15 @@
 using Fusion;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Energia : NetworkBehaviour
+public class Energia : MonoBehaviour
 {
     public GameObject efectoFinEnergia;
     public GameObject efectoRecuperaEnergia;
-    [Networked] public float timer { get; set; }
+    public float timer;
     //public TextMeshProUGUI textoOxigeno;
     public float tiempoMax = 120f;
     public bool death = false;
@@ -29,7 +30,7 @@ public class Energia : NetworkBehaviour
     }
     private void Update()
     {
-        timer -= Runner.DeltaTime;
+        timer -= Time.deltaTime;
         //textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
         barraBateria.fillAmount = timer / tiempoMax; // Actualiza la barra de bater�a seg�n el tiempo restante (valor entre 0 y 1)
 

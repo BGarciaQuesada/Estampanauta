@@ -23,7 +23,7 @@ public class PlayerController : NetworkBehaviour
     Vector3 input;
 
     public bool isTouchingPlanetSurface = false;
-    private Transform MainCameraTransform;
+    public Transform MainCameraTransform;
     public Transform CameraArmTransform;
 
     public GameObject armature;
@@ -54,7 +54,7 @@ public class PlayerController : NetworkBehaviour
 
     private void Start()
     {
-        MainCameraTransform = Camera.main.transform;
+        //MainCameraTransform = Camera.main.transform;
     }
 
     private void Update()

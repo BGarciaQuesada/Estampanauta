@@ -8,16 +8,20 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 {
-    public NetworkManager instance;
+    public static NetworkManager instance;
     public NetworkRunner runnerPrefab;
 
     public static NetworkRunner runnerInstance;
 
-    public int playerCount;
+    public int jugadoresEnSala;
 
     public GameObject playerPrefab;
     public GameObject camera;
     public List<GameObject> players;
+    public bool objetivosCreados = false;
+    [Networked, OnChangedRender(nameof(UpdateObjetives))] public List<Objective> objectives { get; set; }
+    //public List<GameObject> barrasInteractuar = new List<GameObject>();
+    //public List<GameObject> barrasVida = new List<GameObject>();
 
     [SerializeField] private string lobbyName = "default";
 
@@ -44,6 +48,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    public void UpdateObjetives()
+    {
+        GameObject.FindAnyObjectByType<ShipZone>().UpdateUI();
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -57,11 +65,31 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         //Conexion con el servidor de PHOTON, NO la sala
         runnerInstance.JoinSessionLobby(SessionLobby.Shared, lobbyName);
+        objectives = new List<Objective>();
     }
 
     void Update()
     {
+        //if(barrasInteractuar.Count == 0 && SceneManager.GetActiveScene().buildIndex == 2)
+        //{
+        //    barrasInteractuar = new List<GameObject>(GameObject.FindGameObjectsWithTag("BorderItemUse"));
 
+        //    foreach(GameObject barra in barrasInteractuar)
+        //    {
+        //        barra.SetActive(false);
+        //    }
+        //    barrasInteractuar[0].SetActive(true);
+        //}
+
+        //if (barrasVida.Count == 0 && SceneManager.GetActiveScene().buildIndex == 2)
+        //{
+        //    barrasVida = new List<GameObject>(GameObject.FindGameObjectsWithTag("BarraVida"));
+        //    foreach (GameObject barra in barrasVida)
+        //    {
+        //        barra.SetActive(false);
+        //    }
+        //    barrasVida[0].SetActive(true);
+        //}
     }
 
     public static void ReturnToLobby()
@@ -206,22 +234,26 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
 
-        playerCount++;
+       jugadoresEnSala++;
 
         if (player == runner.LocalPlayer)
         {
             NetworkObject playerObject = runner.Spawn(playerPrefab, playerPrefab.transform.position, quaternion.identity, player);
             NetworkObject cameraPlayer = runner.Spawn(camera, new Vector3(0.135250002f, 31.7000008f, 8.10118961f), quaternion.identity, player);
             cameraPlayer.GetComponent<FollowPlayer>().playerTransform = playerObject.transform;
+            playerObject.GetComponent<PlayerController>().MainCameraTransform = cameraPlayer.GetComponent<FollowPlayer>().mainCam.transform;
             runner.SetPlayerObject(player, playerObject);
         }
 
+        //barrasVida[playerCount - 1].SetActive(true);
+        //barrasInteractuar[playerCount - 1].SetActive(true);
 
     }
 
+
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
-        playerCount--;
+       jugadoresEnSala--;
     }
 
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)

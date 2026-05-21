@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FollowPlayer
   followDamping: 0.25
   playerTransform: {fileID: 0}
+  mainCam: {fileID: 1611700999220255662}
 --- !u!114 &3680388794070999606
 MonoBehaviour:
   m_ObjectHideFlags: 0

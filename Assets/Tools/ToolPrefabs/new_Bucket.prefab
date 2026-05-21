@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 4554759178413558820}
   - component: {fileID: 6705151563338093697}
   - component: {fileID: 6359746309519935442}
+  - component: {fileID: -3026387478360506271}
   m_Layer: 0
   m_Name: new_Bucket
   m_TagString: Pick
@@ -181,9 +182,9 @@ Transform:
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7879518218939400572}
   - {fileID: 8342641455525783232}
   - {fileID: 4109200721223812696}
+  - {fileID: 7879518218939400572}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &857426810567076075
@@ -357,6 +358,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.035280313, y: 0.034151744, z: 0.03098433}
   m_Center: {x: -0.0009954035, y: -0.0020650267, z: 0.00091829005}
+--- !u!114 &-3026387478360506271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5358013196427862617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 1931170559
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 7413251777304103267}
+  - {fileID: 4554759178413558820}
+  - {fileID: 6705151563338093697}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &7858982597790888536
 PrefabInstance:
   m_ObjectHideFlags: 0

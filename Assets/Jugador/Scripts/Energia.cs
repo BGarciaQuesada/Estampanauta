@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Energia : MonoBehaviour
+public class Energia : NetworkBehaviour
 {
     public GameObject efectoFinEnergia;
     public GameObject efectoRecuperaEnergia;
@@ -26,12 +26,17 @@ public class Energia : MonoBehaviour
     private void Start()
     {
         timer = tiempoMax;
-        barraBateria = GameObject.Find("BarraOxigeno").transform.GetChild(1).GetComponent<Image>(); // Asegúrate de que el objeto "BarraBateria" tenga un componente Image
+        if (!this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+        {
+            this.gameObject.GetComponent<Energia>().enabled = false;
+        }
+        //barraBateria = GameObject.Find("BarraOxigeno").transform.GetChild(1).GetComponent<Image>(); // Asegúrate de que el objeto "BarraBateria" tenga un componente Image
     }
     private void Update()
     {
         timer -= Time.deltaTime;
         //textoOxigeno.text = "" + timer.ToString("F0"); // Actualiza el texto con el tiempo actual formateado sin decimales
+
         barraBateria.fillAmount = timer / tiempoMax; // Actualiza la barra de bater�a seg�n el tiempo restante (valor entre 0 y 1)
 
         if (timer <0)

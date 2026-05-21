@@ -153,6 +153,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: af227c0da44069642a305aae89228030, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6248473705043779979}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: af227c0da44069642a305aae89228030, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2583201504018009249}
   m_SourcePrefab: {fileID: 100100000, guid: af227c0da44069642a305aae89228030, type: 3}
 --- !u!1 &3610071120721089187 stripped
 GameObject:
@@ -234,6 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
   grabPoint: {fileID: 0}
   colliderColision: {fileID: 0}
+  efectoBrillo: {fileID: 0}
 --- !u!114 &342008924367961309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +273,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0941414, y: 0.09150677, z: 0.096434414}
   m_Center: {x: -0.0030266345, y: 0.00020878017, z: 0.0020711601}
+--- !u!114 &-2583201504018009249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3610071120721089187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 3184831866
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 8087086674417283837}
+  - {fileID: 342008924367961309}
+  ForceRemoteRenderTimeframe: 0
 --- !u!4 &3610071120721317507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: af227c0da44069642a305aae89228030, type: 3}

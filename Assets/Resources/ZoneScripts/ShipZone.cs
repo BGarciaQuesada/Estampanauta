@@ -85,7 +85,8 @@ public class ShipZone : NetworkBehaviour, IItemReceiver
 
         Debug.Log($"{id}: {obj.current}/{obj.required}");
 
-        UpdateUI();
+        //UpdateUI();
+        NetworkManager.instance.UpdateObjetives(); // Para que se actualice en todos los clientes
 
         return true;
     }

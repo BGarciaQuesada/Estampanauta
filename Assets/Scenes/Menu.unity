@@ -1150,6 +1150,15 @@ MonoBehaviour:
   camera: {fileID: 2187195239699360065, guid: d17e43c8f5cfe4f4db5a1203bc5a83d9, type: 3}
   players: []
   objetivosCreados: 0
+  objetos:
+  - {fileID: 5358013196427862617, guid: ad9ee9edfc740974b9e3683bb3f3067c, type: 3}
+  - {fileID: 3610071120721089187, guid: fe34a8f0ce880d84a8a6c33a36f92dfb, type: 3}
+  - {fileID: 9002161090006968198, guid: 59c536f21a839824d8e36e1dc7b5f681, type: 3}
+  spawnPoints:
+  - {fileID: 4653967630646187847, guid: e053e285f878e3544adcccad360c5855, type: 3}
+  - {fileID: 7708530965459335144, guid: 28a64b463db77464a8cc04e7ba3772e5, type: 3}
+  - {fileID: 5306812568279736660, guid: 691153b2af1117046a8371b8b4e9b99e, type: 3}
+  efectoBrillo: {fileID: 0}
   lobbyName: default
   sessionListContentParent: {fileID: 2040071908}
   sessionListEntryPrefab: {fileID: 9077936564986563096, guid: b4aad270c11b0b649b0019a659f4458a, type: 3}

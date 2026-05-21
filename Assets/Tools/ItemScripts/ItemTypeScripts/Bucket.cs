@@ -1,14 +1,16 @@
+using Fusion;
 using UnityEngine;
 
 // [!] El bucket es más especialito porque se usa tanto como herramienta como aplicable tras rellenar.
-public class Bucket : MonoBehaviour, IItem
+public class Bucket : NetworkBehaviour, IItem
 {
-    [SerializeField] private GameObject liquid; // Referencia para ocultarlo/mostrarlo
+    public GameObject liquid; // Referencia para ocultarlo/mostrarlo
 
     public bool IsFull = false;
 
     public void Start()
     {
+        GetComponent<Bucket>().liquid = transform.GetChild(2).gameObject;
         liquid.SetActive(false); // Asegurar que el líquido esté oculto al inicio
     }
 

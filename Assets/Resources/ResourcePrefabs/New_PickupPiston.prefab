@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 5173890222860450944}
   - component: {fileID: 1280704619665484836}
   - component: {fileID: 4643590103835242154}
+  - component: {fileID: 3782786697365004163}
   m_Layer: 0
   m_Name: New_PickupPiston
   m_TagString: Untagged
@@ -193,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
   grabPoint: {fileID: 0}
   colliderColision: {fileID: 271856928833550282}
+  efectoBrillo: {fileID: 0}
 --- !u!114 &1280704619665484836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +222,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemGravityController
   currentPlanet: {fileID: 0}
   gravity: -20
+--- !u!114 &3782786697365004163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660851387425928253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 3793816294
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 5173890222860450944}
+  - {fileID: 1280704619665484836}
+  - {fileID: 4643590103835242154}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1 &1795909404082083738
 GameObject:
   m_ObjectHideFlags: 0

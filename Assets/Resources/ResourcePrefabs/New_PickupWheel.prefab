@@ -70,6 +70,7 @@ GameObject:
   - component: {fileID: 2881108052945338569}
   - component: {fileID: 3776221329343847580}
   - component: {fileID: 5317948343402836335}
+  - component: {fileID: 769154867810207727}
   m_Layer: 0
   m_Name: New_PickupWheel
   m_TagString: Untagged
@@ -86,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 7821257517373578944}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.69, y: 35.72, z: 18.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.58, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -235,6 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
   grabPoint: {fileID: 0}
   colliderColision: {fileID: 4946007884131592080}
+  efectoBrillo: {fileID: 0}
 --- !u!114 &3776221329343847580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +264,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemGravityController
   currentPlanet: {fileID: 0}
   gravity: -20
+--- !u!114 &769154867810207727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7821257517373578944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 888900897
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 2881108052945338569}
+  - {fileID: 3776221329343847580}
+  - {fileID: 5317948343402836335}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &340908411273530982
 PrefabInstance:
   m_ObjectHideFlags: 0

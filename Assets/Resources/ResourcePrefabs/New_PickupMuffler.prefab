@@ -80,7 +80,7 @@ Transform:
   m_GameObject: {fileID: 5704321789891654193}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 8342290355757214859}
   - component: {fileID: 8269387404342243290}
   - component: {fileID: 2618736299492755967}
+  - component: {fileID: -437723896535319670}
   m_Layer: 0
   m_Name: New_PickupMuffler
   m_TagString: Untagged
@@ -173,13 +174,13 @@ Transform:
   m_GameObject: {fileID: 9002161090006968198}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.64, y: 35.71, z: 19.28}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.7, y: 1.7, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7762590943266443244}
   - {fileID: 4750545411322619669}
   - {fileID: 2939000654689710505}
+  - {fileID: 7762590943266443244}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &6464894047273697029
@@ -244,6 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrabbableBehavior
   grabPoint: {fileID: 0}
   colliderColision: {fileID: 2059513444528217475}
+  efectoBrillo: {fileID: 0}
 --- !u!114 &8269387404342243290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +273,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemGravityController
   currentPlanet: {fileID: 0}
   gravity: -20
+--- !u!114 &-437723896535319670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002161090006968198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
+  SortKey: 3936276566
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 8342290355757214859}
+  - {fileID: 8269387404342243290}
+  - {fileID: 2618736299492755967}
+  ForceRemoteRenderTimeframe: 0
 --- !u!1001 &8997922427228243369
 PrefabInstance:
   m_ObjectHideFlags: 0

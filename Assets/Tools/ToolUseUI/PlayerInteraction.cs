@@ -34,39 +34,59 @@ public class PlayerInteraction : NetworkBehaviour
 
     private void Start()
     {
-        var playerInput = GetComponent<PlayerInput>();
-        progressBar = GameObject.Find("BorderItemUse").GetComponent<UIProgressBar>();
-        progressBar.gameObject.SetActive(false);
-        if (playerInput != null)
+        if (!this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
         {
-            soltarAction = playerInput.actions.FindAction("Soltar", throwIfNotFound: false);
-            if (soltarAction != null)
+            this.gameObject.GetComponent<PlayerInteraction>().enabled = false;
+            
+        } else
+        {
+            progressBar.gameObject.SetActive(false);
+
+            var playerInput = GetComponent<PlayerInput>();
+
+            //progressBar = GameObject.Find("BorderItemUse").GetComponent<UIProgressBar>();
+
+            if (playerInput != null)
             {
-                soltarAction.performed += OnSoltarPerformed;
-                soltarAction.Enable();
+                soltarAction = playerInput.actions.FindAction("Soltar", throwIfNotFound: false);
+                if (soltarAction != null)
+                {
+                    soltarAction.performed += OnSoltarPerformed;
+                    soltarAction.Enable();
+                }
             }
         }
+
+
+        
     }
 
     // --- TRIGGERS DE ZONAS ---
 
     private void OnTriggerEnter(Collider other)
     {
-        IItemReceiver receiver = other.GetComponent<IItemReceiver>();
-
-        if (receiver != null)
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
         {
-            currentReceiver = receiver;
-            Debug.Log("Dentro de zona");
+            IItemReceiver receiver = other.GetComponent<IItemReceiver>();
+
+            if (receiver != null)
+            {
+                currentReceiver = receiver;
+                Debug.Log("Dentro de zona");
+            }
         }
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        IItemReceiver receiver = other.GetComponent<IItemReceiver>();
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+        {
+            IItemReceiver receiver = other.GetComponent<IItemReceiver>();
 
-        //esto es pq si el player sale de la zona mientras recarga la barra de interacción da error
-        StartCoroutine(SaleDeZona(receiver));
+            //esto es pq si el player sale de la zona mientras recarga la barra de interacción da error
+            StartCoroutine(SaleDeZona(receiver));
+        }
     }
     IEnumerator SaleDeZona(IItemReceiver receiver)
     {
@@ -85,44 +105,53 @@ public class PlayerInteraction : NetworkBehaviour
     // Este método solo se ha creado para facilitar el asignar heldItem desde PlayerController
     public void SetHeldItem(GameObject obj)
     {
-        heldItem = obj.GetComponent<IItem>();
-
-        if (heldItem == null)
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
         {
-            Debug.LogWarning("El objeto no implementa IItem");
+            heldItem = obj.GetComponent<IItem>();
+
+            if (heldItem == null)
+            {
+                Debug.LogWarning("El objeto no implementa IItem");
+            }
         }
     }
     // --- USAR OBJETO ---
     // [!!!] HACE FALTA METER ESTA ACCIÓN EN EL INPUT SYSTEM!!!!!!
     public void OnInteract(InputValue value)
     {
-        if (value.isPressed)
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
         {
-            StartHold();
-        }
+            if (value.isPressed)
+            {
+                StartHold();
+            }
 
-        if (!value.isPressed)
-            CancelHold();
+            if (!value.isPressed)
+                CancelHold();
+        }
     }
 
     private void Update()
     {
-
-        if (!isHolding) return;
-
-        if (heldItem == null || lockedReceiver == null)
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
         {
-            CancelHold();
-            return;
-        }
 
-        holdTimer += Runner.DeltaTime;
+            if (!isHolding) return;
 
-        progressBar.SetProgress(holdTimer / holdDuration);
+            if (heldItem == null || lockedReceiver == null)
+            {
+                CancelHold();
+                return;
+            }
 
-        if (holdTimer >= holdDuration)
-        {
-            CompleteInteraction();
+            holdTimer += Time.deltaTime;
+
+            progressBar.SetProgress(holdTimer / holdDuration);
+
+            if (holdTimer >= holdDuration)
+            {
+                CompleteInteraction();
+            }
         }
     }
 
@@ -186,19 +215,24 @@ public class PlayerInteraction : NetworkBehaviour
     //NUEVO
     private void OnSoltarPerformed(InputAction.CallbackContext obj)
     {
-        Soltar();
-
+            Soltar();
     }
+
     private void Soltar()
     {
-        if (objetoEnMano == null)
-            return;
-        itemsSFX.PlayOneShot(sueltaObjeto);
-        objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(GetComponent<PlayerController>().currentPlanet); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
-        objetoEnMano = null;    //pa poder coger mas
-        heldItem = null; // Limpiar el item que se tiene en la mano al soltarlo
+        if (this.gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+        {
 
-        // Si el jugador suelta el objeto mientras está en una zona de interacción, cancelar la interacción en curso
-        CancelHold();
+
+            if (objetoEnMano == null)
+                return;
+            itemsSFX.PlayOneShot(sueltaObjeto);
+            objetoEnMano.GetComponent<GrabbableBehavior>().DropItem(GetComponent<PlayerController>().currentPlanet); //avisamos al objeto que se suelte (para que haga cooldown y no se vuelva a coger inmediatamente)
+            objetoEnMano = null;    //pa poder coger mas
+            heldItem = null; // Limpiar el item que se tiene en la mano al soltarlo
+
+            // Si el jugador suelta el objeto mientras está en una zona de interacción, cancelar la interacción en curso
+            CancelHold();
+        }
     }
 }

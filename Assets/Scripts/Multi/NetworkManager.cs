@@ -5,6 +5,7 @@ using Fusion.Sockets;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -13,13 +14,16 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public static NetworkRunner runnerInstance;
 
-    public int jugadoresEnSala;
+    public int jugadoresEnSala = 0;
 
     public GameObject playerPrefab;
     public GameObject camera;
     public List<GameObject> players;
     public bool objetivosCreados = false;
     [Networked, OnChangedRender(nameof(UpdateObjetives))] public List<Objective> objectives { get; set; }
+
+    [SerializeField] public GameObject[] objetos;
+    [SerializeField] public Transform[] spawnPoints;
     //public List<GameObject> barrasInteractuar = new List<GameObject>();
     //public List<GameObject> barrasVida = new List<GameObject>();
 
@@ -233,8 +237,9 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-
-       jugadoresEnSala++;
+        
+        GameObject.FindAnyObjectByType<ShipZone>().UpdateUI();
+        jugadoresEnSala++;
 
         if (player == runner.LocalPlayer)
         {
@@ -242,7 +247,22 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             NetworkObject cameraPlayer = runner.Spawn(camera, new Vector3(0.135250002f, 31.7000008f, 8.10118961f), quaternion.identity, player);
             cameraPlayer.GetComponent<FollowPlayer>().playerTransform = playerObject.transform;
             playerObject.GetComponent<PlayerController>().MainCameraTransform = cameraPlayer.GetComponent<FollowPlayer>().mainCam.transform;
+            playerObject.GetComponent<PlayerInteraction>().progressBar = GameObject.Find("BorderItemUse").GetComponent<UIProgressBar>();
+            playerObject.GetComponent<Energia>().barraBateria = GameObject.Find("BarraOxigeno").transform.GetChild(1).GetComponent<Image>();
             runner.SetPlayerObject(player, playerObject);
+
+            if (jugadoresEnSala == 1)
+            {
+                for (int i = 0; i < objetos.Length; i++)
+                {
+                    NetworkObject obj = runner.Spawn(objetos[i], spawnPoints[i].position, quaternion.identity);
+
+                    if(obj.GetComponent<Bucket>() != null) {
+                        
+                    }
+
+                }
+            }
         }
 
         //barrasVida[playerCount - 1].SetActive(true);
@@ -318,6 +338,6 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
     public void OnSceneLoadStart(NetworkRunner runner)
     {
-
+        
     }
 }

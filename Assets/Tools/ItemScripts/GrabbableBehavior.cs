@@ -1,52 +1,69 @@
-﻿using System.Collections;
+﻿using Fusion;
+using System.Collections;
 using UnityEngine;
 
 // Esta clase maneja el agarrado y soltado de objetos.
 
 // [!] EL PLAYER ES EL QUE TIENE INPUT SYSTEM! No se manejan métodos con InputValue, solo la acción que conllevará hacerlo.
-public class GrabbableBehavior : MonoBehaviour
+public class GrabbableBehavior : NetworkBehaviour
 {
-    [SerializeField] public Transform grabPoint; // Punto donde aparecerá el objeto al ser agarrado
+    public Transform grabPoint; // Punto donde aparecerá el objeto al ser agarrado
 
     private bool itemEquipped = false;
     public Collider colliderColision;   //hay que asignar el objeto Collider hijo
     private Rigidbody rb;
-    [SerializeField] private GameObject efectoBrillo; // Efecto de brillo para indicar que el objeto es agarrable
+    public GameObject efectoBrillo; // Efecto de brillo para indicar que el objeto es agarrable
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        efectoBrillo = transform.Find("Brillo Objetos").gameObject; // Asignar el efecto de brillo desde el hijo del objeto
+        colliderColision = transform.GetChild(0).GetComponent<Collider>(); // Asignar el collider de colisión desde el hijo del objeto
+        efectoBrillo = transform.GetChild(1).gameObject;
+        
     }
     public void PickUpitem()
     {
+        
         if (!itemEquipped) 
         {
             // Avisar al player (busca que tenga PlayerInteraction y, si lo encuentra, le dice que el objeto que tiene en la mano es este)
-            PlayerInteraction player = FindFirstObjectByType<PlayerInteraction>();
-            if (player.objetoEnMano != null)
-                return;
+            //PlayerInteraction player = FindFirstObjectByType<PlayerInteraction>();
 
-            efectoBrillo.SetActive(false); // Desactivar el efecto de brillo al agarrar el objeto            
-            player.itemsSFX.PlayOneShot(player.sonidoRecogeObjeto);
+            Collider[] hits = Physics.OverlapSphere(transform.position, 2); // Realiza una esfera de colisión para verificar si el jugador está 
 
-            itemEquipped = true;
-            colliderColision.enabled = false; // Desactivar colisión para evitar problemas al agarrar el objeto
-
-            // Hacer al objeto hijo de la "mano"
-            Debug.Log("Me voy a la mano");
-            transform.SetParent(grabPoint.transform);
-            transform.localPosition = Vector3.zero;
-            transform.localRotation = Quaternion.identity;
-
-            
-            if (player != null)
+            foreach (Collider col in hits)
             {
-                player.SetHeldItem(gameObject);
-                colliderColision.enabled = false; // Desactivar colisión para evitar problemas al agarrar el objeto
-                rb.isKinematic = true; // Desactivar física para que el objeto no caiga mientras está agarrado
-                player.objetoEnMano = gameObject; // Indicar que el jugador tiene un objeto en la mano
+                if (col.gameObject.tag == "Player")
+                {
+                    PlayerInteraction player = col.GetComponent<PlayerInteraction>();
+
+                    if (player.objetoEnMano != null)
+                        return;
+
+                    efectoBrillo.SetActive(false); // Desactivar el efecto de brillo al agarrar el objeto            
+                    player.itemsSFX.PlayOneShot(player.sonidoRecogeObjeto);
+
+                    itemEquipped = true;
+                    colliderColision.enabled = false; // Desactivar colisión para evitar problemas al agarrar el objeto
+
+                    // Hacer al objeto hijo de la "mano"
+                    Debug.Log("Me voy a la mano");
+                    transform.SetParent(grabPoint.transform);
+                    transform.localPosition = Vector3.zero;
+                    transform.localRotation = Quaternion.identity;
+
+
+                    if (player != null)
+                    {
+                        player.SetHeldItem(gameObject);
+                        colliderColision.enabled = false; // Desactivar colisión para evitar problemas al agarrar el objeto
+                        rb.isKinematic = true; // Desactivar física para que el objeto no caiga mientras está agarrado
+                        player.objetoEnMano = gameObject; // Indicar que el jugador tiene un objeto en la mano
+                    }
+                    break;
+                }
             }
+                
 
         }
     }
@@ -70,6 +87,7 @@ public class GrabbableBehavior : MonoBehaviour
             GetComponent<ItemGravityController>().currentPlanet = currentPlanet; // Asignar el planeta actual para que el objeto caiga correctamente
             StartCoroutine("CooldownPickUp");
             efectoBrillo.SetActive(true); // Reactivar el efecto de brillo al soltar el objeto para indicar que es agarrable de nuevo
+            grabPoint = null;
         }
     }
 

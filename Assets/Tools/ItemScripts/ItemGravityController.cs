@@ -1,6 +1,7 @@
+using Fusion;
 using UnityEngine;
 
-public class ItemGravityController : MonoBehaviour
+public class ItemGravityController : NetworkBehaviour
 {
     public Transform currentPlanet;
     public float gravity = -20f;
@@ -23,11 +24,19 @@ public class ItemGravityController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PlanetController2 planet = other.GetComponent<PlanetController2>();
-
-        if (planet != null)
+        if(currentPlanet == null)
         {
-            currentPlanet = planet.transform;
+            if (other.CompareTag("Planet"))
+            {
+                Transform planet = other.transform.parent;
+
+                if (planet != null)
+                {
+                    currentPlanet = planet;
+                }
+            }
         }
+        
     }
+
 }

@@ -22,8 +22,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     public bool objetivosCreados = false;
     [Networked, OnChangedRender(nameof(UpdateObjetives))] public List<Objective> objectives { get; set; }
 
-    [SerializeField] public GameObject[] objetos;
-    [SerializeField] public Transform[] spawnPoints;
+    //[SerializeField] public GameObject[] objetos;
+    //[SerializeField] public Transform[] spawnPoints;
     //public List<GameObject> barrasInteractuar = new List<GameObject>();
     //public List<GameObject> barrasVida = new List<GameObject>();
 
@@ -251,18 +251,19 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             playerObject.GetComponent<Energia>().barraBateria = GameObject.Find("BarraOxigeno").transform.GetChild(1).GetComponent<Image>();
             runner.SetPlayerObject(player, playerObject);
 
-            if (jugadoresEnSala == 1)
-            {
-                for (int i = 0; i < objetos.Length; i++)
-                {
-                    NetworkObject obj = runner.Spawn(objetos[i], spawnPoints[i].position, quaternion.identity);
+            //if (jugadoresEnSala == 1)
+            //{
+            //    for (int i = 0; i < objetos.Length; i++)
+            //    {
+            //        NetworkObject obj = runner.Spawn(objetos[i], spawnPoints[i].position, quaternion.identity);
 
-                    if(obj.GetComponent<Bucket>() != null) {
-                        
-                    }
+            //        if (obj.GetComponent<Bucket>() != null)
+            //        {
 
-                }
-            }
+            //        }
+
+            //    }
+            //}
         }
 
         //barrasVida[playerCount - 1].SetActive(true);
